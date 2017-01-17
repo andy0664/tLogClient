@@ -8,8 +8,6 @@ import {Trip, POI} from "../../models/models";
 import {AddPoiPage} from "../add-poi/add-poi";
 import {ShowPoiPage} from "../show-poi/show-poi";
 import {AddImagePage} from "../add-image/add-image";
-
-
 /*
  Generated class for the Trip page.
 
@@ -27,9 +25,9 @@ export class TripPage {
   map: L.Map;
   currentLocationMarker: L.Marker;
   markers: L.Marker[];
-  currentLocationIcon: L.AwesomeMarkers.Icon;
-  pictureIcon: L.AwesomeMarkers.Icon;
-  standardIcon: L.AwesomeMarkers.Icon;
+ // currentLocationIcon: L.AwesomeMarkers.Icon;
+  //pictureIcon: L.AwesomeMarkers.Icon;
+  //standardIcon: L.AwesomeMarkers.Icon;
   trip: Trip = new Trip();
   path:L.Polyline;
 
@@ -40,8 +38,8 @@ export class TripPage {
               private tlog: Tlog,
               private asCtrl: ActionSheetController
              ) {
-    L.AwesomeMarkers.Icon.prototype.options.prefix = 'fa';
-    this.currentLocationIcon = L.AwesomeMarkers.icon({
+    //L.AwesomeMarkers.Icon.prototype.options.prefix = 'fa';
+    /*this.currentLocationIcon = L.AwesomeMarkers.icon({
       icon: 'hand-o-down',
       markerColor: 'red'
     });
@@ -52,7 +50,7 @@ export class TripPage {
     this.standardIcon = L.AwesomeMarkers.icon({
       icon: "star",
       markerColor: "blue"
-    });
+    });*/
   }
 
   presentPOIActionSheet = (poi:POI):ActionSheet =>
@@ -113,8 +111,11 @@ export class TripPage {
   }).present();
 
   poiToLatLng = (poi: POI) => L.latLng(poi.loc.coordinates[1], poi.loc.coordinates[0]);
-  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
+  /*poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
     {icon: (poi.images.length>0)?this.pictureIcon:this.standardIcon})
+    .on('popupopen',this.onPopupOpen(poi));*/
+
+  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi))
     .on('popupopen',this.onPopupOpen(poi));
 
 
@@ -133,9 +134,18 @@ export class TripPage {
     this.markers.forEach(m => m.addTo(this.map));
   };
 
-  addCurrentLocationMarker = (pos: L.LatLng) => {
+  /*addCurrentLocationMarker = (pos: L.LatLng) => {
     if (!this.map) this.initMap();
     this.currentLocationMarker = L.marker(pos, {draggable: true, icon: this.currentLocationIcon})
+      .bindPopup("<h3>You are here</h3><p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
+      .addTo(this.map);
+    this.currentLocationMarker.openPopup()
+    this.currentLocationMarker.on("dragend", this.onMarkerPositionChanged.bind(this))
+  };*/
+
+  addCurrentLocationMarker = (pos: L.LatLng) => {
+    if (!this.map) this.initMap();
+    this.currentLocationMarker = L.marker(pos, {draggable: true})
       .bindPopup("<h3>You are here</h3><p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
       .addTo(this.map);
     this.currentLocationMarker.openPopup()
