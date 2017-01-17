@@ -8,6 +8,7 @@ Init:
 5. ionic platform add android
 6. ionic build
 7. ionic serve
+8. Webstorm ECMAScript 6 auswählen
 
 im package.json cordovaPlatforms ändern auf:
 "cordovaPlatforms": [],
