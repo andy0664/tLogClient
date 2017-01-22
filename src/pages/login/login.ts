@@ -3,6 +3,7 @@ import {NavController, AlertController} from 'ionic-angular';
 import {Security} from "../../providers/security";
 import {RegisterPage} from "../register/register";
 import {ListPage} from "../list/list";
+import {Serverconfig} from "../../providers/serverconfig";
 
 
 /*
@@ -20,7 +21,7 @@ export class LoginPage {
   public password: string;
   public username: string;
   public error: string;
-  constructor(private navCtrl: NavController, private security: Security, private alertCtrl: AlertController) {
+  constructor(private navCtrl: NavController, private security: Security, private alertCtrl: AlertController, private serverconfig:Serverconfig) {
 
   }
 
@@ -32,7 +33,7 @@ export class LoginPage {
       this.security.login(this.username,this.password)
       .then(()=>this.navCtrl.setRoot(ListPage))
       .catch((err) => {
-        this.showAlert("Error",`Could not log you in: ${err._body}`)}
+        this.showAlert("Error",`Could not log you in: ${this.serverconfig.host}`)}
       );
 
 
