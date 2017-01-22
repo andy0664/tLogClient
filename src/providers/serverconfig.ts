@@ -17,6 +17,7 @@ export class Serverconfig {
   private _tripURI = `${this._host}/trip`;
   private _poiURI = `${this.host}/poi`;
 
+
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
   public get registerURI():string {return this._registerURI};

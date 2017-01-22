@@ -45,6 +45,13 @@ export class Tlog {
       return res.json()
     });
 
+  updateTrip = (tripID:string, trip:Trip):Promise<Trip>=>
+    this.authHttp.patch(`${this.serverconfig.tripURI}/${trip._id}`,trip)
+      .toPromise().then(res => {
+      console.log("GOT UPDATE RESPONSE: " + res.json());
+      return res.json()
+    });
+
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
 

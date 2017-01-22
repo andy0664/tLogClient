@@ -12,15 +12,21 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>{{trip.name}}</ion-title>
-
     </ion-navbar>
+
     <ion-buttons end>
-      <button ion-button icon-only color="royal" [disabled]="currentLocationMarker" (click)="getCurrentPosition()" >
+      <ion-label>Public</ion-label>
+    </ion-buttons>
+    <ion-buttons end>
+      <ion-toggle end checked="{{trip.share}}" (click)="changeShareState()"></ion-toggle>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" [disabled]="currentLocationMarker" (click)="getCurrentPosition()">
         <ion-icon name="pin"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-only color="royal" [disabled]="!currentLocationMarker" (click)="addPOI()" >
+      <button ion-button icon-only color="royal" [disabled]="!currentLocationMarker" (click)="addPOI()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>

@@ -41,6 +41,11 @@
         <ion-label floating>End Date</ion-label>
         <ion-datetime formControlName="end" max="2020"></ion-datetime>
       </ion-item>
+      <ion-item>
+        <ion-label>Public</ion-label>
+        <ion-toggle formControlName="share" checked="false"></ion-toggle>
+      </ion-item>
+
       <ion-item class="item-md-danger" *ngIf="formErrors.end" >
         {{ formErrors.end }}
       </ion-item>

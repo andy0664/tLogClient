@@ -33,6 +33,7 @@ export class Trip {
   description?: string;
   begin?: Date;
   end?: Date;
+  share?: Boolean;
   createdAt?: Date;
   creator?: {username: {local: string}};
   pois?:[POI];

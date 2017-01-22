@@ -26,7 +26,8 @@ export class AddTripPage {
       'name': [this.trip.name,[Validators.required,Validators.maxLength(100),Validators.minLength(3)]],
       'description': [this.trip.description,[Validators.maxLength(500)]],
       'begin': [this.trip.begin,[]],
-      'end': [this.trip.begin,[]]
+      'end': [this.trip.begin,[]],
+      'share': [false,[]]
     });
   }
 
@@ -41,9 +42,9 @@ export class AddTripPage {
     'description': {
       'maxlength': "Must not exceed 500 characters"
     },
-    'begin': {
-    },
-    'end': {}
+    'begin': {},
+    'end': {},
+    'share': {}
   };
 
   onSubmit = () => {console.log("Submitted TRIP Form!!")};
@@ -74,7 +75,8 @@ export class AddTripPage {
     'name':'',
     'description':'',
     'begin':'',
-    'end':''
+    'end':'',
+    'share':''
   };
 
   save = () => this.tLogService.addTrip(this.tripForm.value)

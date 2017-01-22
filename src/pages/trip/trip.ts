@@ -220,5 +220,11 @@ export class TripPage {
       })
   };
 
+  changeShareState = ()=>{
+    this.trip.share=!this.trip.share;
+    this.tlog.updateTrip(this.trip._id,this.trip)
+      .then()
+      .catch(err=>this.showAlert("Error","Could not change the public state"));
+  }
 
 }
