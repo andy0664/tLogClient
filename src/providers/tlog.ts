@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from "angular2-jwt";
 import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
-import {Trip, POI} from '../models/models';
+import {Trip, POI, User} from '../models/models';
 import {Security} from "./security";
 
 
@@ -45,12 +45,20 @@ export class Tlog {
       return res.json()
     });
 
-  updateTrip = (tripID:string, trip:Trip):Promise<Trip>=>
-    this.authHttp.patch(`${this.serverconfig.tripURI}/${trip._id}`,trip)
+  updateTrip = (tripID: string, trip: Trip): Promise<Trip> =>
+    this.authHttp.patch(`${this.serverconfig.tripURI}/${trip._id}`, trip)
       .toPromise().then(res => {
       console.log("GOT UPDATE RESPONSE: " + res.json());
       return res.json()
     });
+
+  searchUser = (searchValue: string): Promise<Array<User>> =>
+    this.authHttp.get(`${this.serverconfig.userSearchURI}/${searchValue}`)
+      .toPromise().then(res => {
+      console.log("GOT UPDATE RESPONSE: " + res.json());
+      return res.json()
+    });
+
 
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
