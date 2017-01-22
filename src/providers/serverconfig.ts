@@ -15,6 +15,7 @@ export class Serverconfig {
   private _registerURI = `${this._host}/auth/signup`;
   private _mineURI = `${this._host}/trip/mine`;
   private _tripURI = `${this._host}/trip`;
+  private _tripSearchURI = `${this._host}/trip/search`;
   private _poiURI = `${this.host}/poi`;
 
   private _userURI = `${this.host}/user`;
@@ -26,6 +27,7 @@ export class Serverconfig {
   public get registerURI():string {return this._registerURI};
   public get mineURI() {return this._mineURI};
   public get tripURI () {return this._tripURI};
+  public get tripSearchURI () {return this._tripSearchURI};
   public get poiURI() {return this._poiURI};
   public get userURI(){return this._userURI};
   public get userSearchURI(){return this._userSearchURI};

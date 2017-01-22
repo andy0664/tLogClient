@@ -39,3 +39,9 @@ export class Trip {
   creator?: {username: {local: string}};
   pois?:[POI];
 }
+
+export class SearchResult{
+  _id?: string;
+  local?:{username:string};
+  name?:string;
+}

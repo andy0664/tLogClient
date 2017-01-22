@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
-import {User} from "../../models/models";
+import {User, SearchResult} from "../../models/models";
+import {Serverconfig} from "../../providers/serverconfig";
 
 /*
   Generated class for the Search page.
@@ -15,24 +16,30 @@ import {User} from "../../models/models";
 })
 export class SearchPage {
 
-  items:User[];
+  items:SearchResult[];
+  searchType:String;
 
-  constructor(public navCtrl: NavController, private tlog:Tlog, private alertCtrl:AlertController) {}
+  constructor(public navCtrl: NavController, private tlog:Tlog, private alertCtrl:AlertController,private serverConfig:Serverconfig) {}
 
   ionViewDidLoad() {
     console.log('Hello SearchPage Page');
   }
 
   getItems =(ev:any)=>{
+    console.log("SearchType="+this.searchType)
     let searchValue = ev.target.value;
+    let searchString = this.serverConfig.userSearchURI;
     if (searchValue && searchValue.trim() != ''){
-      this.tlog.searchUser(searchValue)
+      if(this.searchType==='trips'){
+        searchString=this.serverConfig.tripSearchURI;
+      }
+      this.tlog.search(searchString,searchValue)
         .then(res => this.items=res)
         .catch(err=>this.showAlert("Error","Search is not working right now"));
+    }else{
+      this.items=[];
     }
   }
-
-
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
     title: title,
