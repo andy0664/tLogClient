@@ -17,24 +17,24 @@
 
 
 <ion-content padding>
-  <ion-list radio-group [(ngModel)]="searchType">
-    <ion-list-header>
-      Search Typ
-    </ion-list-header>
+  <ion-list-header>
+    Search Typ
+  </ion-list-header>
+  <ion-list radio-group>
     <ion-item>
       <ion-label>Users</ion-label>
-      <ion-radio checked="true" value="users"></ion-radio>
+      <ion-radio value="users" checked="true" (click)="resetItems('users')"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Trips</ion-label>
-      <ion-radio checked="true" value="trips"></ion-radio>
+      <ion-radio value="trips" (click)="resetItems('trips')"></ion-radio>
     </ion-item>
   </ion-list>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <div *ngIf="searchType==='trips'">{{ item.name }}</div>
-      <div *ngIf="searchType==='users'">{{ item.local.username }}</div>
+      <div *ngIf="searchType==='trips'" (click)="tripClicked(item._id)">{{ item.name }}</div>
+      <div *ngIf="searchType==='users'" (click)="userClicked(item._id)">{{ item.local.username }}</div>
     </ion-item>
   </ion-list>
 

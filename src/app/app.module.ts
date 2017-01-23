@@ -20,6 +20,7 @@ import {ShowPoiPage} from "../pages/show-poi/show-poi";
 import {AddImagePage} from "../pages/add-image/add-image";
 import {SearchPage} from "../pages/search/search";
 import {ListFriendsPage} from "../pages/list-friends/list-friends";
+import {ShowUserPage} from "../pages/show-user/show-user";
 
 
 let storage = new Storage();
@@ -48,6 +49,7 @@ export function getAuthHttp(http) {
     AddImagePage,
     SearchPage,
     ListFriendsPage,
+    ShowUserPage
   ],
   imports: [
     IonicModule.forRoot(MyApp), ReactiveFormsModule
@@ -66,7 +68,8 @@ export function getAuthHttp(http) {
     ShowPoiPage,
     AddImagePage,
     SearchPage,
-    ListFriendsPage
+    ListFriendsPage,
+    ShowUserPage
   ],
   providers: [Security,
     {

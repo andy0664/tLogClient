@@ -52,6 +52,10 @@ export class Tlog {
       return res.json()
     });
 
+  loadUser = (userID: string): Promise<User> =>
+    this.authHttp.get(`${this.serverconfig.userURI}/${userID}`)
+      .toPromise().then(res => res.json());
+
   search = (searchString:string,searchValue: string): Promise<Array<SearchResult>> =>
     this.authHttp.get(`${searchString}/${searchValue}`)
       .toPromise().then(res => {
