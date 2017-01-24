@@ -18,15 +18,14 @@ export class ShowUserPage {
   user:User=new User();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private tlog: Tlog,private alertCtrl: AlertController) {
-    this.ionViewWillEnter()
   }
 
-  ionViewWillEnter = () => {
+  ngOnInit(): void {
     console.log('Hello ShowUser Page to show: ' + this.navParams.get("user"));
-    this.tlog.loadUser(this.navParams.get("user"))
+    this.tlog.loadOtherUser(this.navParams.get("user"))
       .then(user => {this.user = user;console.log(this.user)})
       .catch(err=>this.showAlert("Error","Could not load the specific user"));
-  };
+  }
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
     title: title,

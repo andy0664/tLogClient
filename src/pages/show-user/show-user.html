@@ -7,16 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title></ion-title>
+    <ion-title>{{user.username || "UsernameTest"}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <h4>Friends:</h4>
   <ion-list>
-    <ion-item>
-      <ion-label>User{{user.local.username}}</ion-label>
+    <ion-item *ngFor="let friend of user.friends">
+      <ion-icon name="person"></ion-icon>
+        {{friend.local.username}}
+    </ion-item>
+  </ion-list>
+  <h4>Trips:</h4>
+  <ion-list>
+    <ion-item *ngFor="let trip of user.trips">
+      <ion-icon name="map"></ion-icon>
+      {{trip.name}}
     </ion-item>
   </ion-list>
 </ion-content>

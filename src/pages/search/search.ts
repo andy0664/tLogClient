@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
-import {User, SearchResult} from "../../models/models";
+import {SearchResult} from "../../models/models";
 import {Serverconfig} from "../../providers/serverconfig";
 import {TripPage} from "../trip/trip";
 import {ShowUserPage} from "../show-user/show-user";

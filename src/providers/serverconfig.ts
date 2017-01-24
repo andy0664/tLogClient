@@ -19,6 +19,7 @@ export class Serverconfig {
   private _poiURI = `${this.host}/poi`;
 
   private _userURI = `${this.host}/user`;
+  private _userOtherURI = `${this.host}/user/other`;
   private _userSearchURI = `${this.host}/user/search`;
 
 
@@ -31,6 +32,7 @@ export class Serverconfig {
   public get poiURI() {return this._poiURI};
   public get userURI(){return this._userURI};
   public get userSearchURI(){return this._userSearchURI};
+  public get userOtherURI(){return this._userOtherURI};
 
   constructor() {
   }

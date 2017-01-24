@@ -7,9 +7,8 @@ export class User {
   password: string;
   email: string;
   friends?:User[];
-  local?:{password:string,
-          email:string,
-          username:string};
+  local?:{username:string};
+  trips?:[{_id:string,name:string}];
 }
 
 export interface Image {
