@@ -6,9 +6,12 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-title>My Trips</ion-title>
-
     </ion-navbar>
     <ion-buttons end>
+      <button ion-button icon-only end (click)="showFriendRequests()" >
+        <ion-icon name="ios-notifications-outline" *ngIf="newFriendRequests.length===0"></ion-icon>
+        <ion-icon name="notifications" *ngIf="newFriendRequests.length!==0"></ion-icon>
+      </button>
       <button ion-button icon-only color="royal" (click)="addTrip()">
         <ion-icon name="add"></ion-icon>
       </button>

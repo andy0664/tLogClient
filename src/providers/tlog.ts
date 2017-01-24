@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from "angular2-jwt";
 import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
-import {Trip, POI, User, SearchResult} from '../models/models';
+import {Trip, POI, User, SearchResult, FriendRequest} from '../models/models';
 import {Security} from "./security";
 
 
@@ -56,13 +56,28 @@ export class Tlog {
     this.authHttp.get(`${this.serverconfig.userOtherURI}/${userID}`)
       .toPromise().then(res => res.json());
 
-  search = (searchString:string,searchValue: string): Promise<Array<SearchResult>> =>
+  sendFriendRequest = (friendRequest: FriendRequest): Promise<boolean> =>
+    this.authHttp.post(`${this.serverconfig.friendRequestURI}`, friendRequest)
+      .toPromise().then(res => true);
+
+  checkFriend = (userID: string): Promise<number> =>
+    this.authHttp.get(`${this.serverconfig.checkFriendURI}/${userID}`)
+      .toPromise().then(res => res.json());
+
+  openFriendRequest = (): Promise<Array<FriendRequest>> =>
+    this.authHttp.get(this.serverconfig.openFriendRequest)
+      .toPromise().then(res => res.json());
+
+  removeFriend = (userID: string): Promise<number> =>
+    this.authHttp.get(`${this.serverconfig.removeFriendURI}/${userID}`)
+      .toPromise().then(res => res.json());
+
+  search = (searchString: string, searchValue: string): Promise<Array<SearchResult>> =>
     this.authHttp.get(`${searchString}/${searchValue}`)
       .toPromise().then(res => {
       console.log("GOT UPDATE RESPONSE: " + res.json());
       return res.json()
     });
-
 
 
   getImage = (imageId: string) =>

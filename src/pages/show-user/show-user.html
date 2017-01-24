@@ -8,17 +8,21 @@
 
   <ion-navbar>
     <ion-title>{{user.username || "UsernameTest"}}</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only end (click)="friendAction()" >
+          <ion-icon name="md-person-add" *ngIf="count===0"></ion-icon>
+          <ion-icon name="md-person" *ngIf="count!==0"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <h4>Friends:</h4>
   <ion-list>
     <ion-item *ngFor="let friend of user.friends">
       <ion-icon name="person"></ion-icon>
-        {{friend.local.username}}
+      {{friend.local.username}}
     </ion-item>
   </ion-list>
   <h4>Trips:</h4>

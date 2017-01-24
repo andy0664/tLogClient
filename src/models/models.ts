@@ -3,6 +3,7 @@ import {SafeUrl} from "@angular/platform-browser";
  * Created by salho on 18.11.16.
  */
 export class User {
+  id?:string;
   username: string;
   password: string;
   email: string;
@@ -17,6 +18,12 @@ export interface Image {
   uploaded: string;
   user: string;
   url?: SafeUrl;
+}
+
+export class FriendRequest{
+  _id?:string;
+  userFrom: string;
+  userTo: string;
 }
 
 export class POI {

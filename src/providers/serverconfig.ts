@@ -21,7 +21,10 @@ export class Serverconfig {
   private _userURI = `${this.host}/user`;
   private _userOtherURI = `${this.host}/user/other`;
   private _userSearchURI = `${this.host}/user/search`;
-
+  private _friendRequestURI = `${this.host}/user/friendRequest`;
+  private _checkFriendURI = `${this.host}/user/checkFriend`;
+  private _removeFriendURI = `${this.host}/user/removeFriend`;
+  private _openFriendRequest = `${this.host}/user/openFriendRequest`;
 
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
@@ -33,6 +36,10 @@ export class Serverconfig {
   public get userURI(){return this._userURI};
   public get userSearchURI(){return this._userSearchURI};
   public get userOtherURI(){return this._userOtherURI};
+  public get friendRequestURI(){return this._friendRequestURI};
+  public get checkFriendURI(){return this._checkFriendURI};
+  public get removeFriendURI(){return this._removeFriendURI};
+  public get openFriendRequest(){return this._openFriendRequest};
 
   constructor() {
   }
