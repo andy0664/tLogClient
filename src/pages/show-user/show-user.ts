@@ -28,6 +28,10 @@ export class ShowUserPage {
 
   ngOnInit(): void {
     console.log('Hello ShowUser Page to show: ' + this.navParams.get("user"));
+    this.initUser();
+  }
+
+  initUser = ()=>{
     this.tlog.loadOtherUser(this.navParams.get("user"))
       .then(user => {
         this.user = user;
@@ -66,7 +70,7 @@ export class ShowUserPage {
 
   removeFriend = () =>{
     this.tlog.removeFriend(this.navParams.get("user"))
-      .then(res => this.count=res)
+      .then(res => this.initUser())
       .catch(err => this.showAlert("ERROR",`Couldn't remove friend ${err.json().message}`))
   }
 

@@ -22,8 +22,20 @@ export interface Image {
 
 export class FriendRequest{
   _id?:string;
-  userFrom: string;
-  userTo: string;
+  userFrom?: string;
+  userTo?: string;
+}
+
+export class Friend{
+  _id?:string;
+  local:{username:string};
+}
+
+export class ReceiveFriendRequest{
+  _id?:string;
+  userTo:string;
+  userFrom:{_id:string,local:{username:string}};
+  createdAt:Date;
 }
 
 export class POI {

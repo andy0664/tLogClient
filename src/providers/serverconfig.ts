@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Serverconfig {
 
-  private _host = "http://192.168.1.2:3000/api";
+  private _host = "http://127.0.0.1:3000/api";
   private _loginURI = `${this._host}/auth/login`;
   private _registerURI = `${this._host}/auth/signup`;
   private _mineURI = `${this._host}/trip/mine`;
@@ -25,6 +25,9 @@ export class Serverconfig {
   private _checkFriendURI = `${this.host}/user/checkFriend`;
   private _removeFriendURI = `${this.host}/user/removeFriend`;
   private _openFriendRequest = `${this.host}/user/openFriendRequest`;
+  private _acceptFriendRequest = `${this.host}/user/acceptRequest`;
+  private _rejectFriendRequest = `${this.host}/user/rejectRequest`;
+  private _userFriendURI = `${this.host}/user/getFriends`;
 
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
@@ -40,6 +43,9 @@ export class Serverconfig {
   public get checkFriendURI(){return this._checkFriendURI};
   public get removeFriendURI(){return this._removeFriendURI};
   public get openFriendRequest(){return this._openFriendRequest};
+  public get acceptFriendRequest(){return this._acceptFriendRequest};
+  public get rejectFriendRequest(){return this._rejectFriendRequest};
+  public get userFriendURI(){return this._userFriendURI};
 
   constructor() {
   }

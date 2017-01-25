@@ -4,10 +4,11 @@ import {NavController, NavParams, AlertController, LoadingController} from 'ioni
 
 import {Security} from '../../providers/security';
 import {LoginPage} from "../login/login";
-import {Trip, FriendRequest} from "../../models/models";
+import {Trip, ReceiveFriendRequest} from "../../models/models";
 import {Tlog} from "../../providers/tlog";
 import {AddTripPage} from "../add-trip/add-trip";
 import {TripPage} from "../trip/trip";
+import {FriendRequestNotificationPage} from "../friend-request-notification/friend-request-notification";
 
 
 
@@ -18,7 +19,7 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<Trip>;
-  newFriendRequests:FriendRequest[]=[];
+  newFriendRequests:ReceiveFriendRequest[]=[];
 
 
   constructor(public navCtrl: NavController,
@@ -84,5 +85,8 @@ export class ListPage {
 
   showFriendRequests = ()=>{
     console.log("Open Requests: "+this.newFriendRequests.length);
+    this.navCtrl.push(FriendRequestNotificationPage, {
+      friendRequests: this.newFriendRequests
+    });
   }
 }

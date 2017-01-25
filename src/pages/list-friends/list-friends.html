@@ -7,12 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>listFriends</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Your Friends</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let friend of friends" (click)="userClicked(friend._id)">
+      <ion-icon name="person"></ion-icon>
+      {{friend.local.username}}
+    </ion-item>
+  </ion-list>
 </ion-content>

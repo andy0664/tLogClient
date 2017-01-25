@@ -14,5 +14,15 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let request of friendRequests">
+      {{request.userFrom.local.username}}
+      <button ion-button icon-only color="royal" (click)="accept(request.userFrom._id)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" (click)="reject(request.userFrom._id)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
 </ion-content>
