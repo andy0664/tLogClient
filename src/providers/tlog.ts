@@ -92,7 +92,17 @@ export class Tlog {
       return res.json()
     });
 
+  likeTrip = (tripID:string):Promise<boolean> =>
+    this.authHttp.get(`${this.serverconfig.likeTripURI}/${tripID}`)
+      .toPromise().then(res=>true);
 
+  unlikeTrip = (tripID:string):Promise<boolean> =>
+    this.authHttp.get(`${this.serverconfig.unlikeTripURI}/${tripID}`)
+      .toPromise().then(res=>true);
+
+  checkLikeTrip = (tripID:string):Promise<number> =>
+    this.authHttp.get(`${this.serverconfig.checkLikeTripURI}/${tripID}`)
+      .toPromise().then(res=>res.json());
 
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();

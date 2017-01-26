@@ -30,6 +30,8 @@ export class TripPage {
   //standardIcon: L.AwesomeMarkers.Icon;
   trip: Trip = new Trip();
   path:L.Polyline;
+  like:number=0;
+  likeCount:number;
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -198,7 +200,11 @@ export class TripPage {
     this.tlog.loadTrip(this.navParams.get("trip"))
       .then(trip => {
         this.trip = trip;
-        if (this.trip.pois.length === 0) this.getCurrentPosition(); else this.initMap()
+        this.likeCount=this.trip.likes.length;
+        this.tlog.checkLikeTrip(this.trip._id)
+          .then(res => {this.like=res;
+            if (this.trip.pois.length === 0) this.getCurrentPosition(); else this.initMap()
+          })
       })
   };
 
@@ -223,8 +229,18 @@ export class TripPage {
   changeShareState = ()=>{
     this.trip.share=!this.trip.share;
     this.tlog.updateTrip(this.trip._id,this.trip)
-      .then()
+      .then(res=>this.trip=res)
       .catch(err=>this.showAlert("Error","Could not change the public state"));
+  }
+
+  changeLikeState = ()=>{
+    let action = this.tlog.likeTrip;
+    if (this.like===1)
+      action=this.tlog.unlikeTrip
+    action(this.trip._id)
+      .then(()=>{if(this.like===0) {this.like=1;this.likeCount++} else{this.like=0;this.likeCount--}})
+      .catch(err=>this.showAlert("Error","There seems to be a problem"));
+
   }
 
 }

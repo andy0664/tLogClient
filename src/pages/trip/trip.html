@@ -15,6 +15,15 @@
     </ion-navbar>
 
     <ion-buttons end>
+      <ion-label>{{likeCount}}</ion-label>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="changeLikeState()" >
+        <ion-icon  name="heart" *ngIf="like===1"></ion-icon>
+        <ion-icon  name="heart-outline" *ngIf="like!==1"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
       <ion-label>Public</ion-label>
     </ion-buttons>
     <ion-buttons end>

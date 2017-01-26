@@ -59,6 +59,7 @@ export class Trip {
   createdAt?: Date;
   creator?: {username: {local: string}};
   pois?:[POI];
+  likes?:[{_id:string,local:{username:string}}];
 }
 
 export class SearchResult{

@@ -29,6 +29,10 @@ export class Serverconfig {
   private _rejectFriendRequest = `${this.host}/user/rejectRequest`;
   private _userFriendURI = `${this.host}/user/getFriends`;
 
+  private _likeTripURI = `${this.host}/trip/like`;
+  private _unlikeTripURI = `${this.host}/trip/unlike`;
+  private _checkLikeTripURI = `${this.host}/trip/checkLike`;
+
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
   public get registerURI():string {return this._registerURI};
@@ -46,6 +50,9 @@ export class Serverconfig {
   public get acceptFriendRequest(){return this._acceptFriendRequest};
   public get rejectFriendRequest(){return this._rejectFriendRequest};
   public get userFriendURI(){return this._userFriendURI};
+  public get likeTripURI(){return this._likeTripURI};
+  public get unlikeTripURI(){return this._unlikeTripURI};
+  public get checkLikeTripURI(){return this._checkLikeTripURI};
 
   constructor() {
   }
