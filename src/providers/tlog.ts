@@ -3,7 +3,10 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from "angular2-jwt";
 import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
-import {Trip, POI, User, SearchResult, FriendRequest, ReceiveFriendRequest, Friend} from '../models/models';
+import {
+  Trip, POI, User, SearchResult, FriendRequest, ReceiveFriendRequest, Friend, Comment,
+  NewComment
+} from '../models/models';
 import {Security} from "./security";
 
 
@@ -102,6 +105,14 @@ export class Tlog {
 
   checkLikeTrip = (tripID:string):Promise<number> =>
     this.authHttp.get(`${this.serverconfig.checkLikeTripURI}/${tripID}`)
+      .toPromise().then(res=>res.json());
+
+  loadTripComments = (tripID:string):Promise<Array<Comment>> =>
+  this.authHttp.get(`${this.serverconfig.commentsURI}/${tripID}`)
+    .toPromise().then(res=>res.json());
+
+  addComments = (comment:NewComment):Promise<Comment> =>
+    this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
       .toPromise().then(res=>res.json());
 
   getImage = (imageId: string) =>

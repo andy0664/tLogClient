@@ -8,6 +8,7 @@ import {Trip, POI} from "../../models/models";
 import {AddPoiPage} from "../add-poi/add-poi";
 import {ShowPoiPage} from "../show-poi/show-poi";
 import {AddImagePage} from "../add-image/add-image";
+import {ShowCommentsPage} from "../show-comments/show-comments";
 /*
  Generated class for the Trip page.
 
@@ -241,6 +242,13 @@ export class TripPage {
       .then(()=>{if(this.like===0) {this.like=1;this.likeCount++} else{this.like=0;this.likeCount--}})
       .catch(err=>this.showAlert("Error","There seems to be a problem"));
 
+  }
+
+  comment = ()=>{
+    console.log("write comment");
+    this.navCtrl.push(ShowCommentsPage, {
+      tripID: this.trip._id
+    });
   }
 
 }

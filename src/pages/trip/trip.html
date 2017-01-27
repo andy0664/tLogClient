@@ -14,6 +14,13 @@
       <ion-title>{{trip.name}}</ion-title>
     </ion-navbar>
 
+
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="comment()" >
+      <i class="fa fa-comment fa-2x"  aria-hidden="true" (click)="comment()"></i>
+      </button>
+    </ion-buttons>
+
     <ion-buttons end>
       <ion-label>{{likeCount}}</ion-label>
     </ion-buttons>

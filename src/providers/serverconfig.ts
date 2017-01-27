@@ -29,6 +29,9 @@ export class Serverconfig {
   private _rejectFriendRequest = `${this.host}/user/rejectRequest`;
   private _userFriendURI = `${this.host}/user/getFriends`;
 
+  private _commentsURI = `${this.host}/comment/all`;
+  private _addCommentURI = `${this.host}/comment`;
+
   private _likeTripURI = `${this.host}/trip/like`;
   private _unlikeTripURI = `${this.host}/trip/unlike`;
   private _checkLikeTripURI = `${this.host}/trip/checkLike`;
@@ -53,6 +56,8 @@ export class Serverconfig {
   public get likeTripURI(){return this._likeTripURI};
   public get unlikeTripURI(){return this._unlikeTripURI};
   public get checkLikeTripURI(){return this._checkLikeTripURI};
+  public get commentsURI(){return this._commentsURI};
+  public get addCommentURI(){return this._addCommentURI};
 
   constructor() {
   }

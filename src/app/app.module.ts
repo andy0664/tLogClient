@@ -22,6 +22,7 @@ import {SearchPage} from "../pages/search/search";
 import {ListFriendsPage} from "../pages/list-friends/list-friends";
 import {ShowUserPage} from "../pages/show-user/show-user";
 import {FriendRequestNotificationPage} from "../pages/friend-request-notification/friend-request-notification";
+import {ShowCommentsPage} from "../pages/show-comments/show-comments";
 
 
 let storage = new Storage();
@@ -51,7 +52,8 @@ export function getAuthHttp(http) {
     SearchPage,
     ListFriendsPage,
     ShowUserPage,
-    FriendRequestNotificationPage
+    FriendRequestNotificationPage,
+    ShowCommentsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp), ReactiveFormsModule
@@ -72,7 +74,8 @@ export function getAuthHttp(http) {
     SearchPage,
     ListFriendsPage,
     ShowUserPage,
-    FriendRequestNotificationPage
+    FriendRequestNotificationPage,
+    ShowCommentsPage
   ],
   providers: [Security,
     {

@@ -62,6 +62,18 @@ export class Trip {
   likes?:[{_id:string,local:{username:string}}];
 }
 
+export class NewComment{
+  trip:string;
+  comment:string;
+}
+
+export class Comment{
+  creator?:{_id:string,local:{username:string}};
+  trip?:{_id:string,name:string};
+  comment:string;
+  createdAt:Date;
+}
+
 export class SearchResult{
   _id?: string;
   local?:{username:string};
