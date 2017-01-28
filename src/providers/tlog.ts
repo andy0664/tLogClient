@@ -111,7 +111,7 @@ export class Tlog {
   this.authHttp.get(`${this.serverconfig.commentsURI}/${tripID}`)
     .toPromise().then(res=>res.json());
 
-  addComments = (comment:NewComment):Promise<Comment> =>
+  addComment = (comment:NewComment):Promise<Comment> =>
     this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
       .toPromise().then(res=>res.json());
 

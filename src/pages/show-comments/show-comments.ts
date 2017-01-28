@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, AlertController, LoadingController, NavParams} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
+import {AddCommentPage} from "../add-comment/add-comment";
 
 /*
   Generated class for the ShowComments page.
@@ -39,6 +40,13 @@ export class ShowCommentsPage {
       .catch(err => {
         loading.dismiss(); this.showAlert("INFO","Could not load comments.");
       })
+  }
+
+
+  newComment = ()=>{
+    this.navCtrl.push(AddCommentPage, {
+      tripID: this.tripID
+    });
   }
 
 
