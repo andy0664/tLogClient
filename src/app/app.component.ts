@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import {LoginPage} from "../pages/login/login";
 import {SearchPage} from "../pages/search/search";
 import {ListFriendsPage} from "../pages/list-friends/list-friends";
+import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
 
 
 
@@ -32,7 +33,8 @@ export class MyApp {
       { title: 'Login', component: LoginPage },
       { title: 'My Trips', component: ListPage },
       { title: 'Search', component: SearchPage },
-      { title: 'My Friends', component: ListFriendsPage }
+      { title: 'My Friends', component: ListFriendsPage },
+      { title: 'Test Geocoding', component: TestGeocodingPage }
     ];
   }
 

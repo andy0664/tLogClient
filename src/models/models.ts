@@ -67,6 +67,20 @@ export class NewComment{
   comment:string;
 }
 
+export class GeoLocation{
+  label:string;
+  coordinates:Array<number>;
+  boundingbox:Array<number>;
+}
+
+export class GeoResult{
+  x: string;
+  y: string;
+  label: string;
+  bounds: [number[]];
+  raw: {boundingbox:Array<number>};
+}
+
 export class Comment{
   creator?:{_id:string,local:{username:string}};
   trip?:{_id:string,name:string};
