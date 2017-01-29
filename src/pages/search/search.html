@@ -29,11 +29,15 @@
       <ion-label>Trips</ion-label>
       <ion-radio value="trips" (click)="resetItems('trips')"></ion-radio>
     </ion-item>
+    <ion-item>
+      <ion-label>Trip by location</ion-label>
+      <ion-radio value="locations" (click)="resetItems('locations')"></ion-radio>
+    </ion-item>
   </ion-list>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <div *ngIf="searchType==='trips'" (click)="tripClicked(item._id)">{{ item.name }}</div>
+      <div *ngIf="searchType==='trips' || searchType==='locations'" (click)="tripClicked(item._id)">{{ item.name }}</div>
       <div *ngIf="searchType==='users'" (click)="userClicked(item._id)">{{ item.local.username }}</div>
     </ion-item>
   </ion-list>

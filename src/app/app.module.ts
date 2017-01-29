@@ -25,6 +25,7 @@ import {FriendRequestNotificationPage} from "../pages/friend-request-notificatio
 import {ShowCommentsPage} from "../pages/show-comments/show-comments";
 import {AddCommentPage} from "../pages/add-comment/add-comment";
 import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
+import {Geocoder} from "../providers/geocoder";
 
 
 let storage = new Storage();
@@ -90,7 +91,8 @@ export function getAuthHttp(http) {
       deps: [Http]
     },
     Serverconfig,
-    Tlog
+    Tlog,
+    Geocoder
   ]
 })
 export class AppModule {}

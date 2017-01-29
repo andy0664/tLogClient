@@ -88,12 +88,13 @@ export class Tlog {
   this.authHttp.get(`${this.serverconfig.userFriendURI}/${userID}`)
     .toPromise().then(res => res.json())
 
-  search = (searchString: string, searchValue: string): Promise<Array<SearchResult>> =>
-    this.authHttp.get(`${searchString}/${searchValue}`)
+  search = (searchString: string): Promise<Array<SearchResult>> =>
+    this.authHttp.get(searchString)
       .toPromise().then(res => {
       console.log("GOT UPDATE RESPONSE: " + res.json());
       return res.json()
     });
+
 
   likeTrip = (tripID:string):Promise<boolean> =>
     this.authHttp.get(`${this.serverconfig.likeTripURI}/${tripID}`)

@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {NavController, AlertController, LoadingController, Loading} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
-import {SearchResult} from "../../models/models";
+import {SearchResult, GeoResult} from "../../models/models";
 import {Serverconfig} from "../../providers/serverconfig";
 import {TripPage} from "../trip/trip";
 import {ShowUserPage} from "../show-user/show-user";
+import {Geocoder} from "../../providers/geocoder";
 
 /*
  Generated class for the Search page.
@@ -22,8 +23,15 @@ export class SearchPage {
   searchType: string='users';
   searchValue: string;
   searchString: string;
+  geoLocation:GeoResult;
+  loader:Loading;
 
-  constructor(public navCtrl: NavController, private tlog: Tlog, private alertCtrl: AlertController, private serverConfig: Serverconfig) {
+  constructor(public navCtrl: NavController,
+              private tlog: Tlog,
+              private alertCtrl: AlertController,
+              private serverConfig: Serverconfig,
+              private geocoder:Geocoder,
+              private loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -31,24 +39,54 @@ export class SearchPage {
   }
 
   getItems = (ev: any) => {
-    this.searchValue = ev.target.value;
-    this.searchString = this.serverConfig.userSearchURI;
-    this.search();
+      this.searchValue = ev.target.value;
+      this.prepareSearchString();
   }
 
-  resetItems = (type:string) => {this.searchType=type;this.search()}
+  resetItems = (type:string) => {this.items=[];this.searchType=type;this.prepareSearchString()}
 
-  search = () => {
+
+
+  getLocationCoords = ()=>{
+    this.geocoder.geocode(this.searchValue)
+      .then((res:Array<GeoResult>) => this.prepareGeoLocation(res))
+      .catch(err => {this.loader.dismiss();this.showAlert("Error", "Could not find the Location with that name")});
+  }
+
+  prepareGeoLocation=(res:Array<GeoResult>)=>{
+    if(res.length===0){
+      this.loader.dismiss();
+      this.showAlert("INFO","Could not find any location with that name")
+    }else{
+      this.geoLocation=res[0];
+      let startPoint = parseFloat(this.geoLocation.raw.boundingbox[0])+parseFloat(this.geoLocation.raw.boundingbox[2]);
+      let endPoint = parseFloat(this.geoLocation.raw.boundingbox[1])+parseFloat(this.geoLocation.raw.boundingbox[3]);
+      this.searchString = `${this.serverConfig.tripByLocationURI}?startPoint=${startPoint}&endPoint=${endPoint}`;
+      this.search();
+    }
+  }
+
+  prepareSearchString = () => {
+    this.loader = this.loadingCtrl.create({
+      content: "searching"
+    });
     this.items = [];
     if (this.searchValue && this.searchValue.trim() != '') {
-      this.searchString = this.serverConfig.userSearchURI;
-      if (this.searchType === 'trips') {
-        this.searchString = this.serverConfig.tripSearchURI;
+      switch(this.searchType){
+        case 'trips':
+          this.searchString = `${this.serverConfig.tripSearchURI}/${this.searchValue}`; this.search();break;
+        case 'users':
+          this.searchString = `${this.serverConfig.userSearchURI}/${this.searchValue}`;this.search();break;
+        case 'locations':
+          this.getLocationCoords();
       }
-      this.tlog.search(this.searchString, this.searchValue)
-        .then(res => this.items = res)
-        .catch(err => this.showAlert("Error", "Search is not working right now"));
     }
+  }
+
+  search = ()=>{
+    this.tlog.search(this.searchString)
+      .then(res => {this.loader.dismiss();this.items = res})
+      .catch(err => {this.loader.dismiss();this.showAlert("Error", "Search is not working right now")});
   }
 
   tripClicked = (tripID:string)=>{

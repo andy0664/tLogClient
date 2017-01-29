@@ -40,12 +40,14 @@ export class ReceiveFriendRequest{
 
 export class POI {
   _id?: string;
+  trip?:{_id:string,name:string};
   name: string;
   description: string;
   createdAt: Date;
   loc: {
     coordinates: number[]
   };
+  sumCoordinates:number;
   images: Image[];
 }
 
@@ -70,7 +72,7 @@ export class NewComment{
 export class GeoLocation{
   label:string;
   coordinates:Array<number>;
-  boundingbox:Array<number>;
+  boundingbox:Array<string>;
 }
 
 export class GeoResult{
@@ -78,7 +80,7 @@ export class GeoResult{
   y: string;
   label: string;
   bounds: [number[]];
-  raw: {boundingbox:Array<number>};
+  raw: {boundingbox:Array<string>};
 }
 
 export class Comment{

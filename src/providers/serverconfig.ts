@@ -16,6 +16,7 @@ export class Serverconfig {
   private _mineURI = `${this._host}/trip/mine`;
   private _tripURI = `${this._host}/trip`;
   private _tripSearchURI = `${this._host}/trip/search`;
+  private _tripByLocationURI = `${this._host}/trip/findByLocation`;
   private _poiURI = `${this.host}/poi`;
 
   private _userURI = `${this.host}/user`;
@@ -58,6 +59,7 @@ export class Serverconfig {
   public get checkLikeTripURI(){return this._checkLikeTripURI};
   public get commentsURI(){return this._commentsURI};
   public get addCommentURI(){return this._addCommentURI};
+  public get tripByLocationURI(){return this._tripByLocationURI};
 
   constructor() {
   }
