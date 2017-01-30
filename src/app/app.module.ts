@@ -26,6 +26,7 @@ import {ShowCommentsPage} from "../pages/show-comments/show-comments";
 import {AddCommentPage} from "../pages/add-comment/add-comment";
 import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
 import {Geocoder} from "../providers/geocoder";
+import {ListTopTripsPage} from "../pages/list-top-trips/list-top-trips";
 
 
 let storage = new Storage();
@@ -58,7 +59,8 @@ export function getAuthHttp(http) {
     FriendRequestNotificationPage,
     ShowCommentsPage,
     AddCommentPage,
-    TestGeocodingPage
+    TestGeocodingPage,
+    ListTopTripsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp), ReactiveFormsModule
@@ -82,7 +84,8 @@ export function getAuthHttp(http) {
     FriendRequestNotificationPage,
     ShowCommentsPage,
     AddCommentPage,
-    TestGeocodingPage
+    TestGeocodingPage,
+    ListTopTripsPage
   ],
   providers: [Security,
     {

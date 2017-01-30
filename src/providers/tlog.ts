@@ -116,6 +116,10 @@ export class Tlog {
     this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
       .toPromise().then(res=>res.json());
 
+  getTopTenTrips = (dateFilter:Date,startPoint:number,endPoint:number):Promise<Array<SearchResult>> =>
+  this.authHttp.get(`${this.serverconfig.topTenTripURI}?startPoint=${startPoint}&endPoint=${endPoint}&dateFilter=${dateFilter}`)
+    .toPromise().then(res=>res.json());
+
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
 

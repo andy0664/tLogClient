@@ -25,5 +25,4 @@ export class Geocoder {
   geocode = (location:string):Promise<Array<GeoResult>> =>
     this.provider.search({query:location})
       .then((res:Array<GeoResult>)=>res)
-
 }

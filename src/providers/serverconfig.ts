@@ -36,6 +36,7 @@ export class Serverconfig {
   private _likeTripURI = `${this.host}/trip/like`;
   private _unlikeTripURI = `${this.host}/trip/unlike`;
   private _checkLikeTripURI = `${this.host}/trip/checkLike`;
+  private _topTenTripURI = `${this.host}/trip/topTenTrips`;
 
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
@@ -60,6 +61,7 @@ export class Serverconfig {
   public get commentsURI(){return this._commentsURI};
   public get addCommentURI(){return this._addCommentURI};
   public get tripByLocationURI(){return this._tripByLocationURI};
+  public get topTenTripURI(){return this._topTenTripURI};
 
   constructor() {
   }
