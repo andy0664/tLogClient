@@ -30,10 +30,10 @@
         <ion-icon  name="heart-outline" *ngIf="like!==1"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="isOwner">
       <ion-label>Public</ion-label>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="isOwner">
       <ion-toggle end checked="{{trip.share}}" (click)="changeShareState()"></ion-toggle>
     </ion-buttons>
     <ion-buttons end>

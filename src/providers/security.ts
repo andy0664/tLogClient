@@ -41,8 +41,12 @@ export class Security {
     this.storage.set('id_token',token),
     this.storage.set('user',new JwtHelper().decodeToken(token))]).then(()=>true)
 
-
-
+  logout = (user:User):Promise<boolean>=>{
+    this.storage.remove('id_token');
+    this.storage.remove('user');
+    return this.auth.post(this.serverconfig.logoutURI,user)
+      .toPromise().then(res => true);
+  }
 
   login = (username: string, password:string):Promise<boolean> => {
     let headers = new Headers();
@@ -52,6 +56,11 @@ export class Security {
       {headers: headers}
     ).toPromise().then((res) => res.json().token).then(this.storeToken).then(()=>true);
   }
+
+  isOwner = (userID:string):Promise<boolean> =>
+    this.getUser()
+      .then(user => user.username===userID);
+
 
   register = (user:User):Promise<boolean> => this.http.post(this.serverconfig.registerURI,user)
     .toPromise().then((res) => res.json().token).then(this.storeToken);

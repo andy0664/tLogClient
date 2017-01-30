@@ -21,8 +21,19 @@ export class LoginPage {
   public password: string;
   public username: string;
   public error: string;
-  constructor(private navCtrl: NavController, private security: Security, private alertCtrl: AlertController, private serverconfig:Serverconfig) {
+  constructor(private navCtrl: NavController,
+              private security: Security,
+              private alertCtrl: AlertController,
+              private serverconfig:Serverconfig) {
+  }
 
+  ionViewWillEnter = () => {
+    this.security.isNotloggedIn().then(exp => {
+      if (!exp){
+        this.security.getUser()
+          .then(user => this.security.logout(user))
+          .catch()}
+    });
   }
 
   showAlert = (title:string,message:string) =>

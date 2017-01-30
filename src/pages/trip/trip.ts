@@ -9,6 +9,7 @@ import {AddPoiPage} from "../add-poi/add-poi";
 import {ShowPoiPage} from "../show-poi/show-poi";
 import {AddImagePage} from "../add-image/add-image";
 import {ShowCommentsPage} from "../show-comments/show-comments";
+import {Security} from "../../providers/security";
 /*
  Generated class for the Trip page.
 
@@ -21,42 +22,43 @@ import {ShowCommentsPage} from "../show-comments/show-comments";
 })
 export class TripPage {
 
-  defaultLocation:L.LatLng =  new L.LatLng(47.0720698,15.4429915);
-  center:L.LatLng = this.defaultLocation;
+  defaultLocation: L.LatLng = new L.LatLng(47.0720698, 15.4429915);
+  center: L.LatLng = this.defaultLocation;
   map: L.Map;
   currentLocationMarker: L.Marker;
   markers: L.Marker[];
- // currentLocationIcon: L.AwesomeMarkers.Icon;
+  isOwner: boolean = false;
+  // currentLocationIcon: L.AwesomeMarkers.Icon;
   //pictureIcon: L.AwesomeMarkers.Icon;
   //standardIcon: L.AwesomeMarkers.Icon;
   trip: Trip = new Trip();
-  path:L.Polyline;
-  like:number=0;
-  likeCount:number;
+  path: L.Polyline;
+  like: number = 0;
+  likeCount: number;
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
               public navParams: NavParams,
               private loadingCtrl: LoadingController,
               private tlog: Tlog,
-              private asCtrl: ActionSheetController
-             ) {
+              private asCtrl: ActionSheetController,
+              private security: Security) {
     //L.AwesomeMarkers.Icon.prototype.options.prefix = 'fa';
     /*this.currentLocationIcon = L.AwesomeMarkers.icon({
-      icon: 'hand-o-down',
-      markerColor: 'red'
-    });
-    this.pictureIcon = L.AwesomeMarkers.icon({
-      icon: "picture-o",
-      markerColor: "blue"
-    });
-    this.standardIcon = L.AwesomeMarkers.icon({
-      icon: "star",
-      markerColor: "blue"
-    });*/
+     icon: 'hand-o-down',
+     markerColor: 'red'
+     });
+     this.pictureIcon = L.AwesomeMarkers.icon({
+     icon: "picture-o",
+     markerColor: "blue"
+     });
+     this.standardIcon = L.AwesomeMarkers.icon({
+     icon: "star",
+     markerColor: "blue"
+     });*/
   }
 
-  presentPOIActionSheet = (poi:POI):ActionSheet =>
+  presentPOIActionSheet = (poi: POI): ActionSheet =>
     this.asCtrl.create({
       //title: 'Modify your album',
       buttons: [
@@ -71,12 +73,12 @@ export class TripPage {
           handler: () => {
             this.editPOI(poi);
           }
-        },{
+        }, {
           text: 'Add Image',
           handler: () => {
             this.addImage(poi);
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -95,7 +97,7 @@ export class TripPage {
           handler: () => {
             this.addPOI();
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -115,36 +117,36 @@ export class TripPage {
 
   poiToLatLng = (poi: POI) => L.latLng(poi.loc.coordinates[1], poi.loc.coordinates[0]);
   /*poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
-    {icon: (poi.images.length>0)?this.pictureIcon:this.standardIcon})
-    .on('popupopen',this.onPopupOpen(poi));*/
+   {icon: (poi.images.length>0)?this.pictureIcon:this.standardIcon})
+   .on('popupopen',this.onPopupOpen(poi));*/
 
   poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi))
-    .on('popupopen',this.onPopupOpen(poi));
+    .on('popupopen', this.onPopupOpen(poi));
 
 
   initMap = () => {
     if (this.map) this.map.remove();
     if (this.trip.pois.length > 0) this.center = this.poiToLatLng(this.trip.pois[this.trip.pois.length - 1]);
     this.map = L
-        .map("map")
-        .setView(this.center, 13);
+      .map("map")
+      .setView(this.center, 13);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
     this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
-    this.path = new L.Polyline(this.markers.map(m=>m.getLatLng()));
+    this.path = new L.Polyline(this.markers.map(m => m.getLatLng()));
     this.map.addLayer(this.path);
     this.markers.forEach(m => m.addTo(this.map));
   };
 
   /*addCurrentLocationMarker = (pos: L.LatLng) => {
-    if (!this.map) this.initMap();
-    this.currentLocationMarker = L.marker(pos, {draggable: true, icon: this.currentLocationIcon})
-      .bindPopup("<h3>You are here</h3><p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
-      .addTo(this.map);
-    this.currentLocationMarker.openPopup()
-    this.currentLocationMarker.on("dragend", this.onMarkerPositionChanged.bind(this))
-  };*/
+   if (!this.map) this.initMap();
+   this.currentLocationMarker = L.marker(pos, {draggable: true, icon: this.currentLocationIcon})
+   .bindPopup("<h3>You are here</h3><p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
+   .addTo(this.map);
+   this.currentLocationMarker.openPopup()
+   this.currentLocationMarker.on("dragend", this.onMarkerPositionChanged.bind(this))
+   };*/
 
   addCurrentLocationMarker = (pos: L.LatLng) => {
     if (!this.map) this.initMap();
@@ -163,27 +165,27 @@ export class TripPage {
     console.log("Marker dragged");
   };
 
-  onPopupOpen = (poi:POI) => (e:L.LeafletPopupEvent) => {
+  onPopupOpen = (poi: POI) => (e: L.LeafletPopupEvent) => {
     this.map.panTo(e.target.getLatLng());
     this.presentPOIActionSheet(poi);
   };
 
 
-  editPOI = (poi:POI) => {
+  editPOI = (poi: POI) => {
     console.log("About to edit POI " + JSON.stringify(poi));
     this.navCtrl.push(AddPoiPage,
       {
         poi: poi,
         tripID: this.trip._id,
-        coordinates: {lng: poi.loc.coordinates[0], lat:poi.loc.coordinates[1]}
+        coordinates: {lng: poi.loc.coordinates[0], lat: poi.loc.coordinates[1]}
       });
   };
 
-  showPoi = (poi) => this.navCtrl.push(ShowPoiPage,{
-    poi:poi
+  showPoi = (poi) => this.navCtrl.push(ShowPoiPage, {
+    poi: poi
   });
 
-  addImage = (poi:POI) => this.navCtrl.push(AddImagePage,{poi:poi,tripID: this.trip._id});
+  addImage = (poi: POI) => this.navCtrl.push(AddImagePage, {poi: poi, tripID: this.trip._id});
 
   addPOI = () => this.navCtrl.push(AddPoiPage,
     {
@@ -201,12 +203,17 @@ export class TripPage {
     this.tlog.loadTrip(this.navParams.get("trip"))
       .then(trip => {
         this.trip = trip;
-        this.likeCount=this.trip.likes.length;
-        this.tlog.checkLikeTrip(this.trip._id)
-          .then(res => {this.like=res;
-            if (this.trip.pois.length === 0) this.getCurrentPosition(); else this.initMap()
+        this.likeCount = this.trip.likes.length;
+        this.security.isOwner(this.trip.creator.local.username)
+          .then((res: boolean) => {
+            this.isOwner = res;
+            this.tlog.checkLikeTrip(this.trip._id)
+              .then(res => {
+                this.like = res;
+                if (this.trip.pois.length === 0) this.getCurrentPosition(); else this.initMap()
+              })
           })
-      })
+      }).catch(err => this.showAlert("Error", `There seems to be a problem ${err}`));
   };
 
 
@@ -216,35 +223,43 @@ export class TripPage {
     Geolocation.getCurrentPosition()
       .then(resp => {
         loader.dismiss();
-        this.center = new L.LatLng(resp.coords.latitude,resp.coords.longitude);
+        this.center = new L.LatLng(resp.coords.latitude, resp.coords.longitude);
         this.addCurrentLocationMarker(this.center);
       })
       .catch(err => {
         loader.dismiss();
         this.center = this.defaultLocation;
-        this.showAlert("INFO","Could not get your position, using a default location instead.");
+        this.showAlert("INFO", "Could not get your position, using a default location instead.");
         this.addCurrentLocationMarker(this.center);
       })
   };
 
-  changeShareState = ()=>{
-    this.trip.share=!this.trip.share;
-    this.tlog.updateTrip(this.trip._id,this.trip)
-      .then(res=>this.trip=res)
-      .catch(err=>this.showAlert("Error","Could not change the public state"));
+  changeShareState = () => {
+    this.trip.share = !this.trip.share;
+    this.tlog.updateTrip(this.trip._id, this.trip)
+      .then(res => this.trip = res)
+      .catch(err => this.showAlert("Error", "Could not change the public state"));
   }
 
-  changeLikeState = ()=>{
+  changeLikeState = () => {
     let action = this.tlog.likeTrip;
-    if (this.like===1)
-      action=this.tlog.unlikeTrip
+    if (this.like === 1)
+      action = this.tlog.unlikeTrip
     action(this.trip._id)
-      .then(()=>{if(this.like===0) {this.like=1;this.likeCount++} else{this.like=0;this.likeCount--}})
-      .catch(err=>this.showAlert("Error","There seems to be a problem"));
+      .then(() => {
+        if (this.like === 0) {
+          this.like = 1;
+          this.likeCount++
+        } else {
+          this.like = 0;
+          this.likeCount--
+        }
+      })
+      .catch(err => this.showAlert("Error", "There seems to be a problem"));
 
   }
 
-  comment = ()=>{
+  comment = () => {
     console.log("write comment");
     this.navCtrl.push(ShowCommentsPage, {
       tripID: this.trip._id

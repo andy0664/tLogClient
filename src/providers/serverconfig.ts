@@ -12,6 +12,7 @@ export class Serverconfig {
 
   private _host = "http://127.0.0.1:3000/api";
   private _loginURI = `${this._host}/auth/login`;
+  private _logoutURI = `${this._host}/auth/logout`;
   private _registerURI = `${this._host}/auth/signup`;
   private _mineURI = `${this._host}/trip/mine`;
   private _tripURI = `${this._host}/trip`;
@@ -40,6 +41,7 @@ export class Serverconfig {
 
   public get host():string {return this._host};
   public get loginURI():string {return this._loginURI};
+  public get logoutURI():string {return this._logoutURI};
   public get registerURI():string {return this._registerURI};
   public get mineURI() {return this._mineURI};
   public get tripURI () {return this._tripURI};

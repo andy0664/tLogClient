@@ -59,7 +59,7 @@ export class Trip {
   end?: Date;
   share?: Boolean;
   createdAt?: Date;
-  creator?: {username: {local: string}};
+  creator?: {local: {username:string}};
   pois?:[POI];
   likes?:[{_id:string,local:{username:string}}];
 }
