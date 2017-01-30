@@ -90,6 +90,14 @@ export class Comment{
   createdAt:Date;
 }
 
+export class TopTenTripResult{
+  _id?: string;
+  creator?:{_id:string,local:{username:string}};
+  name?:string;
+  description?:string;
+  likeCount?:number;
+}
+
 export class SearchResult{
   _id?: string;
   local?:{username:string};

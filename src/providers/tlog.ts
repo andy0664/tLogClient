@@ -5,7 +5,7 @@ import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
 import {
   Trip, POI, User, SearchResult, FriendRequest, ReceiveFriendRequest, Friend, Comment,
-  NewComment
+  NewComment, TopTenTripResult
 } from '../models/models';
 import {Security} from "./security";
 
@@ -116,7 +116,7 @@ export class Tlog {
     this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
       .toPromise().then(res=>res.json());
 
-  getTopTenTrips = (dateFilter:Date,startPoint:number,endPoint:number):Promise<Array<SearchResult>> =>
+  getTopTenTrips = (dateFilter:Date,startPoint:number,endPoint:number):Promise<Array<TopTenTripResult>> =>
   this.authHttp.get(`${this.serverconfig.topTenTripURI}?startPoint=${startPoint}&endPoint=${endPoint}&dateFilter=${dateFilter}`)
     .toPromise().then(res=>res.json());
 

@@ -28,8 +28,11 @@
   <button ion-button (click)="filter()">Apply filter</button>
 
   <ion-list>
-    <ion-item *ngFor="let item of trips">
-      <div (click)="tripClicked(item._id)">{{ item.name }}</div>
+    <ion-item *ngFor="let item of trips" (click)="tripClicked(item._id)">
+      <i class="fa fa-map-signs" aria-hidden="true"></i>
+      {{ item.name }} by {{item.creator.local.username}}
+      <ion-icon  name="heart"></ion-icon>
+      {{item.likeCount}}
     </ion-item>
   </ion-list>
 

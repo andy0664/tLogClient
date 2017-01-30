@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
-import {SearchResult, GeoResult} from "../../models/models";
+import {GeoResult, TopTenTripResult} from "../../models/models";
 import {Tlog} from "../../providers/tlog";
 import {Geocoder} from "../../providers/geocoder";
 import {TripPage} from "../trip/trip";
@@ -23,7 +23,7 @@ export class ListTopTripsPage {
   defaultLocationCoord:number=0.0;
   startPoint:number;
   endPoint:number;
-  trips:Array<SearchResult>=[];
+  trips:Array<TopTenTripResult>=[];
 
   constructor(public navCtrl: NavController,
               private tLogService: Tlog,
