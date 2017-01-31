@@ -1,3 +1,78 @@
 page-show-comments {
 
+  .chatBubble{
+
+    img.profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+    }
+
+    img.profile-pic.left {
+      left: 10px;
+    }
+
+    img.profile-pic.right {
+      right: 10px;
+    }
+
+    .message {
+      font-size: medium;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .message-detail {
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .chat-bubble {
+      background-color: #f8f8f8;
+      border: 1px solid #c8c8c8;
+      border-radius: 5px;
+      width: 110px;
+      text-align: center;
+      padding: 20px;
+      position: absolute;
+    }
+
+    .chat-bubble:before {
+      content: "\00a0";
+      display: block;
+      height: 16px;
+      width: 9px;
+      position: absolute;
+      bottom: -7.5px;
+    }
+
+    .chat-bubble.left {
+      float: left;
+      margin-left: 45px;
+    }
+
+    .chat-bubble.left:before {
+      left: 10px;
+      -webkit-transform: rotate(70deg) skew(5deg);
+    }
+
+    .chat-bubble.right {
+      color: #000;
+      float: right;
+      margin-right: 45px;
+    }
+
+    .chat-bubble.right:before {
+      right: 10px;
+      -webkit-transform: rotate(118deg) skew(-5deg);
+    }
+
+    .chat-bubble.right a.autolinker {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+
 }

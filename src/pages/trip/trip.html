@@ -26,8 +26,8 @@
     </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="changeLikeState()" >
-        <ion-icon  name="heart" *ngIf="like===1"></ion-icon>
-        <ion-icon  name="heart-outline" *ngIf="like!==1"></ion-icon>
+        <ion-icon  class="heard" name="heart" *ngIf="like===1"></ion-icon>
+        <ion-icon  class="heard" name="heart-outline" *ngIf="like!==1"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end *ngIf="isOwner">

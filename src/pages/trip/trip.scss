@@ -7,5 +7,20 @@ page-trip {
   bottom: 0px;
 }
 
+  .heard {
+    color: #ff2f2e;
+    //position: absolute;
+    //left: 0px;
+    //top: 0px;
+    z-index: -1;
+  }
+
+
+  .comment {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+  }
 
 }

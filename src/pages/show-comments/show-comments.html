@@ -23,6 +23,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let comment of comments">
+
       <ion-label stacked>{{comment.creator.local.username}}:</ion-label>
       <ion-input readonly="true" [(ngModel)]="comment.comment"></ion-input>
     </ion-item>

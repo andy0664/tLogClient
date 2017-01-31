@@ -26,12 +26,12 @@
     <ion-datetime [(ngModel)]="filterDate"></ion-datetime>
   </ion-item>
   <button ion-button (click)="filter()">Apply filter</button>
-
+ <hr style="height: 4px;" />
   <ion-list>
     <ion-item *ngFor="let item of trips" (click)="tripClicked(item._id)">
-      <i class="fa fa-map-signs" aria-hidden="true"></i>
-      {{ item.name }} by {{item.creator.local.username}}
-      <ion-icon  name="heart"></ion-icon>
+      <i class="fa fa-map-signs fa-2" aria-hidden="true"></i>
+      <b>{{ item.name }}</b> by {{item.creator.local.username}}
+      <ion-icon class="heard" name="heart"></ion-icon>
       {{item.likeCount}}
     </ion-item>
   </ion-list>
