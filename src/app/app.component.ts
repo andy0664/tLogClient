@@ -10,6 +10,7 @@ import {SearchPage} from "../pages/search/search";
 import {ListFriendsPage} from "../pages/list-friends/list-friends";
 import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
 import {ListTopTripsPage} from "../pages/list-top-trips/list-top-trips";
+import {UserprofilePage} from "../pages/userprofile/userprofile";
 
 
 
@@ -32,6 +33,7 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Logout', component: LoginPage },
+      { title: 'My Profile', component: UserprofilePage },
       { title: 'My Trips', component: ListPage },
       { title: 'Search', component: SearchPage },
       { title: 'My Friends', component: ListFriendsPage },
