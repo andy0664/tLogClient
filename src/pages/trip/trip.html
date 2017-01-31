@@ -17,32 +17,34 @@
 
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="comment()" >
-      <i class="fa fa-comment fa-2x"  aria-hidden="true" (click)="comment()"></i>
+        <ion-icon  class="fa fa-comment fa-2x" name="comment" *ngIf="commentCount>=1"></ion-icon>
+        <ion-icon  class="fa fa-comment-o fa-2x" name="comment-outline" *ngIf="commentCount===0"></ion-icon>
+        <ion-label> {{commentCount}}</ion-label>
       </button>
+
     </ion-buttons>
 
-    <ion-buttons end>
-      <ion-label>{{likeCount}}</ion-label>
-    </ion-buttons>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="changeLikeState()" >
         <ion-icon  class="heard" name="heart" *ngIf="like===1"></ion-icon>
         <ion-icon  class="heard" name="heart-outline" *ngIf="like!==1"></ion-icon>
+        <ion-label>{{likeCount}}</ion-label>
       </button>
-    </ion-buttons>
-    <ion-buttons end *ngIf="isOwner">
-      <ion-label>Public</ion-label>
     </ion-buttons>
     <ion-buttons end *ngIf="isOwner">
       <ion-toggle end checked="{{trip.share}}" (click)="changeShareState()"></ion-toggle>
     </ion-buttons>
+    <ion-buttons end >
+      <ion-label *ngIf="trip.share===true && isOwner===true">Public</ion-label>
+      <ion-label *ngIf="trip.share===false && isOwner===true">Private</ion-label>
+    </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-only color="royal" [disabled]="currentLocationMarker" (click)="getCurrentPosition()">
+      <button *ngIf="isOwner" ion-button icon-only color="royal" [disabled]="currentLocationMarker" (click)="getCurrentPosition()">
         <ion-icon name="pin"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-only color="royal" [disabled]="!currentLocationMarker" (click)="addPOI()">
+      <button *ngIf="isOwner" ion-button icon-only color="royal" [disabled]="!currentLocationMarker" (click)="addPOI()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>

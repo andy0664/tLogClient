@@ -35,6 +35,8 @@ export class TripPage {
   path: L.Polyline;
   like: number = 0;
   likeCount: number;
+  comments:Array<Component>=[];
+  commentCount: number;
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -133,7 +135,13 @@ export class TripPage {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
+
+    if(this.isOwner){
+      this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
+    } else if(this.isOwner===false){
+      this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
+    }
+
     this.path = new L.Polyline(this.markers.map(m => m.getLatLng()));
     this.map.addLayer(this.path);
     this.markers.forEach(m => m.addTo(this.map));
@@ -151,7 +159,8 @@ export class TripPage {
   addCurrentLocationMarker = (pos: L.LatLng) => {
     if (!this.map) this.initMap();
     this.currentLocationMarker = L.marker(pos, {draggable: true})
-      .bindPopup("<h3>You are here</h3><p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
+      .bindPopup("<h3>You are here</h3>" +
+        "<p>You can drag this marker. Press the '+' Icon in the Task Bar to add this POI.</p>")
       .addTo(this.map);
     this.currentLocationMarker.openPopup()
     this.currentLocationMarker.on("dragend", this.onMarkerPositionChanged.bind(this))
@@ -167,7 +176,9 @@ export class TripPage {
 
   onPopupOpen = (poi: POI) => (e: L.LeafletPopupEvent) => {
     this.map.panTo(e.target.getLatLng());
-    this.presentPOIActionSheet(poi);
+    if(this.isOwner){
+      this.presentPOIActionSheet(poi);
+    }
   };
 
 
@@ -195,15 +206,30 @@ export class TripPage {
 
 
   ionViewWillEnter = () => {
+
     if (this.currentLocationMarker) {
       this.map.removeLayer(this.currentLocationMarker);
       this.currentLocationMarker = null;
     }
+
     console.log('Hello TripPage Page to show: ' + this.navParams.get("trip"));
     this.tlog.loadTrip(this.navParams.get("trip"))
       .then(trip => {
         this.trip = trip;
         this.likeCount = this.trip.likes.length;
+
+        const loading = this.loadingCtrl.create({
+          content: "Fetching comments"
+        });
+        this.tlog.loadTripComments(this.trip._id)
+          .then(res=>{
+            loading.dismiss();this.comments=res
+            this.commentCount = this.comments.length;
+          })
+          .catch(err => {
+            loading.dismiss(); this.showAlert("INFO","Could not load comments.");
+          })
+
         this.security.isOwner(this.trip.creator.local.username)
           .then((res: boolean) => {
             this.isOwner = res;
@@ -214,6 +240,8 @@ export class TripPage {
               })
           })
       }).catch(err => this.showAlert("Error", `There seems to be a problem ${err}`));
+
+
   };
 
 
@@ -262,7 +290,8 @@ export class TripPage {
   comment = () => {
     console.log("write comment");
     this.navCtrl.push(ShowCommentsPage, {
-      tripID: this.trip._id
+      tripID: this.trip._id,
+      trip: this.trip
     });
   }
 
