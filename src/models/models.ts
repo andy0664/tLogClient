@@ -51,6 +51,19 @@ export class POI {
   images: Image[];
 }
 
+export class ProfileUser {
+  _id?:string;
+  friends?:Friend[];
+  images?: Image[];
+  tripNotifications?:boolean;
+  local?:{
+    password:string;
+    email:string;
+    username:string};
+  roles:string[];
+}
+
+
 export class Trip {
   _id?: string;
   name: string;
@@ -59,7 +72,7 @@ export class Trip {
   end?: Date;
   share?: Boolean;
   createdAt?: Date;
-  creator?: {local: {username:string}};
+  creator?: {_id:string, local: {username:string}};
   pois?:[POI];
   likes?:[{_id:string,local:{username:string}}];
 }

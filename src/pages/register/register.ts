@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, AlertController} from 'ionic-angular';
 import {FormBuilder,FormGroup,Validators} from "@angular/forms"
 import {User} from "../../models/models";
 import {Security} from "../../providers/security";
@@ -24,7 +24,7 @@ export class RegisterPage {
   user: User = new User();
   error: string;
 
-  constructor(public navCtrl: NavController, private fb:FormBuilder, private security: Security) {this.onValueChanged()}
+  constructor(public navCtrl: NavController, private fb:FormBuilder, private security: Security, private alertCtrl:AlertController) {this.onValueChanged()}
 
   onSubmit() {
     this.user = this.registerForm.value;
@@ -87,9 +87,15 @@ export class RegisterPage {
     'email':''
   };
 
+  showAlert = (title: string, message: string) => this.alertCtrl.create({
+    title: title,
+    message: message,
+    buttons: ['OK']
+  }).present();
+
   register() {
     this.security.register(this.registerForm.value).then(()=>this.navCtrl.setRoot(ListPage))
-      .catch(err => this.error = err.message);
+      .catch(err => this.showAlert('ERROR',`Register does not work ${err.message || err}`));
   }
 
 

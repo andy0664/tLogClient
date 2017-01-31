@@ -5,7 +5,7 @@ import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
 import {
   Trip, POI, User, SearchResult, FriendRequest, ReceiveFriendRequest, Friend, Comment,
-  NewComment, TopTenTripResult
+  NewComment, TopTenTripResult, ProfileUser
 } from '../models/models';
 import {Security} from "./security";
 
@@ -122,6 +122,19 @@ export class Tlog {
 
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
+
+
+
+  getUser = (userID:string):Promise<ProfileUser> =>
+    this.authHttp.get(`${this.serverconfig.userURI}/${userID}`).toPromise()
+      .then(res=>res.json());
+
+
+  updateUser = (userID: string, user: ProfileUser): Promise<ProfileUser> =>
+    this.authHttp.patch(`${this.serverconfig.userURI}/${user._id}`, user)
+      .toPromise().then(res => res.json());
+
+
 
   getImageURL = (imageId: string): Promise<string> => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

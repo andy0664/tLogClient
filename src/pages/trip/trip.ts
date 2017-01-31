@@ -204,7 +204,7 @@ export class TripPage {
       .then(trip => {
         this.trip = trip;
         this.likeCount = this.trip.likes.length;
-        this.security.isOwner(this.trip.creator.local.username)
+        this.security.isOwner(this.trip.creator._id)
           .then((res: boolean) => {
             this.isOwner = res;
             this.tlog.checkLikeTrip(this.trip._id)

@@ -59,7 +59,7 @@ export class Security {
 
   isOwner = (userID:string):Promise<boolean> =>
     this.getUser()
-      .then(user => user.username===userID);
+      .then(user => user.id===userID);
 
 
   register = (user:User):Promise<boolean> => this.http.post(this.serverconfig.registerURI,user)
