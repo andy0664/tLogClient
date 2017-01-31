@@ -85,8 +85,8 @@ export class Tlog {
 
 
   getUserFriends = (userID:string):Promise<Array<Friend>> =>
-  this.authHttp.get(`${this.serverconfig.userFriendURI}/${userID}`)
-    .toPromise().then(res => res.json())
+    this.authHttp.get(`${this.serverconfig.userFriendURI}/${userID}`)
+      .toPromise().then(res => res.json())
 
   search = (searchString: string): Promise<Array<SearchResult>> =>
     this.authHttp.get(searchString)
@@ -109,16 +109,16 @@ export class Tlog {
       .toPromise().then(res=>res.json());
 
   loadTripComments = (tripID:string):Promise<Array<Comment>> =>
-  this.authHttp.get(`${this.serverconfig.commentsURI}/${tripID}`)
-    .toPromise().then(res=>res.json());
+    this.authHttp.get(`${this.serverconfig.commentsURI}/${tripID}`)
+      .toPromise().then(res=>res.json());
 
   addComment = (comment:NewComment):Promise<Comment> =>
     this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
       .toPromise().then(res=>res.json());
 
   getTopTenTrips = (dateFilter:Date,startPoint:number,endPoint:number):Promise<Array<TopTenTripResult>> =>
-  this.authHttp.get(`${this.serverconfig.topTenTripURI}?startPoint=${startPoint}&endPoint=${endPoint}&dateFilter=${dateFilter}`)
-    .toPromise().then(res=>res.json());
+    this.authHttp.get(`${this.serverconfig.topTenTripURI}?startPoint=${startPoint}&endPoint=${endPoint}&dateFilter=${dateFilter}`)
+      .toPromise().then(res=>res.json());
 
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
