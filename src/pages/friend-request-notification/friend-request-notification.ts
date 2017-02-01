@@ -28,8 +28,8 @@ export class FriendRequestNotificationPage {
   }
 
   ionViewWillEnter() {
-    this.friendRequests = this.navParams.get("friendRequests");
-    this.notifications = this.navParams.get("notifications");
+    this.updateFriendRequest();
+    this.updateNotifications();
   }
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
@@ -40,20 +40,26 @@ export class FriendRequestNotificationPage {
 
   accept = (userID: string) => {
     this.tlog.acceptFriendRequest(userID)
-      .then(() => this.removeRequest())
+      .then(() => this.updateFriendRequest())
       .catch(err => this.showAlert("Error", `Could not send request: ${err.message || err}`))
   }
 
   reject = (userID: string) => {
     this.tlog.rejectFriendRequest(userID)
-      .then(() => this.removeRequest())
+      .then(() => this.updateFriendRequest())
       .catch(err => this.showAlert("Error", `Could not send request: ${err.message || err}`))
   }
 
-  removeRequest = () => {
+  updateFriendRequest = () => {
     this.tlog.openFriendRequest()
       .then((res) => this.friendRequests = res)
       .catch(err => this.showAlert("Error", `Problem to update friend requests: ${err.message || err}`))
+  }
+
+  updateNotifications = () => {
+    this.tlog.getNotifications()
+      .then((res) => this.notifications = res)
+      .catch(err => this.showAlert("Error", `Problem to update notifications: ${err.message || err}`))
   }
 
   displayTrip = (tripID: string, notificationID: string) => {
