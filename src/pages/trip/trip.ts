@@ -251,7 +251,7 @@ export class TripPage {
             this.tlog.checkLikeTrip(this.trip._id)
               .then(res => {
                 this.like = res;
-                if (this.trip.pois.length === 0) this.getCurrentPosition(); else this.initMap()
+                if (this.trip.pois.length === 0 && this.isOwner) this.getCurrentPosition(); else this.initMap()
               })
           })
       }).catch(err => this.showAlert("Error", `There seems to be a problem ${err}`));

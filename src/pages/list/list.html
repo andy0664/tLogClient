@@ -9,10 +9,10 @@
     </ion-navbar>
     <ion-buttons end>
 
-      <button ion-button icon-only end (click)="showFriendRequests()" >
-        <ion-label>{{newFriendRequests.length}}</ion-label>
-        <ion-icon name="ios-notifications-outline" *ngIf="newFriendRequests.length===0"></ion-icon>
-        <ion-icon name="notifications" style="color: #ffd53e;" *ngIf=" newFriendRequests.length!==0"></ion-icon>
+      <button ion-button icon-only end (click)="showRequests()" >
+        <ion-label>{{newFriendRequests.length+newNotifications.length}}</ion-label>
+        <ion-icon name="ios-notifications-outline" *ngIf="newFriendRequests.length+newNotifications.length===0"></ion-icon>
+        <ion-icon name="notifications" style="color: #ffd53e;" *ngIf="newFriendRequests.length+newNotifications.length!==0"></ion-icon>
       </button>
       <button  ion-button icon-only color="royal" (click)="addTrip()">
         <ion-icon name="add"></ion-icon>

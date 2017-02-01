@@ -5,7 +5,7 @@ import {Promise} from "es6-promise";
 import {Serverconfig} from "./serverconfig";
 import {
   Trip, POI, User, SearchResult, FriendRequest, ReceiveFriendRequest, Friend, Comment,
-  NewComment, TopTenTripResult, ProfileUser
+  NewComment, TopTenTripResult, ProfileUser, Notification
 } from '../models/models';
 import {Security} from "./security";
 import { ToastController } from 'ionic-angular';
@@ -77,18 +77,27 @@ export class Tlog {
     this.authHttp.get(`${this.serverconfig.removeFriendURI}/${userID}`)
       .toPromise().then(res => res.json());
 
-  acceptFriendRequest = (userID:string): Promise<boolean> =>
+  acceptFriendRequest = (userID: string): Promise<boolean> =>
     this.authHttp.get(`${this.serverconfig.acceptFriendRequest}/${userID}`)
       .toPromise().then(res => true);
 
-  rejectFriendRequest = (userID:string): Promise<boolean> =>
+  rejectFriendRequest = (userID: string): Promise<boolean> =>
     this.authHttp.get(`${this.serverconfig.rejectFriendRequest}/${userID}`)
       .toPromise().then(res => true);
 
 
-  getUserFriends = (userID:string):Promise<Array<Friend>> =>
+  getUserFriends = (userID: string): Promise<Array<Friend>> =>
     this.authHttp.get(`${this.serverconfig.userFriendURI}/${userID}`)
-      .toPromise().then(res => res.json())
+      .toPromise().then(res => res.json());
+
+  getNotifications = (): Promise<Array<Notification>> =>
+    this.authHttp.get(this.serverconfig.checkNotificationURI)
+      .toPromise().then(res => res.json());
+
+  readNotification = (notificationID:string): Promise<Array<Notification>> =>
+    this.authHttp.get(`${this.serverconfig.readNotificationURI}/${notificationID}`)
+      .toPromise().then(res => res.json());
+
 
   search = (searchString: string): Promise<Array<SearchResult>> =>
     this.authHttp.get(searchString)
@@ -98,38 +107,37 @@ export class Tlog {
     });
 
 
-  likeTrip = (tripID:string):Promise<boolean> =>
+  likeTrip = (tripID: string): Promise<boolean> =>
     this.authHttp.get(`${this.serverconfig.likeTripURI}/${tripID}`)
-      .toPromise().then(res=>true);
+      .toPromise().then(res => true);
 
-  unlikeTrip = (tripID:string):Promise<boolean> =>
+  unlikeTrip = (tripID: string): Promise<boolean> =>
     this.authHttp.get(`${this.serverconfig.unlikeTripURI}/${tripID}`)
-      .toPromise().then(res=>true);
+      .toPromise().then(res => true);
 
-  checkLikeTrip = (tripID:string):Promise<number> =>
+  checkLikeTrip = (tripID: string): Promise<number> =>
     this.authHttp.get(`${this.serverconfig.checkLikeTripURI}/${tripID}`)
-      .toPromise().then(res=>res.json());
+      .toPromise().then(res => res.json());
 
-  loadTripComments = (tripID:string):Promise<Array<Comment>> =>
+  loadTripComments = (tripID: string): Promise<Array<Comment>> =>
     this.authHttp.get(`${this.serverconfig.commentsURI}/${tripID}`)
-      .toPromise().then(res=>res.json());
+      .toPromise().then(res => res.json());
 
-  addComment = (comment:NewComment):Promise<Comment> =>
-    this.authHttp.post(`${this.serverconfig.addCommentURI}`,comment)
-      .toPromise().then(res=>res.json());
+  addComment = (comment: NewComment): Promise<Comment> =>
+    this.authHttp.post(`${this.serverconfig.addCommentURI}`, comment)
+      .toPromise().then(res => res.json());
 
-  getTopTenTrips = (dateFilter:Date,startPoint:number,endPoint:number):Promise<Array<TopTenTripResult>> =>
+  getTopTenTrips = (dateFilter: Date, startPoint: number, endPoint: number): Promise<Array<TopTenTripResult>> =>
     this.authHttp.get(`${this.serverconfig.topTenTripURI}?startPoint=${startPoint}&endPoint=${endPoint}&dateFilter=${dateFilter}`)
-      .toPromise().then(res=>res.json());
+      .toPromise().then(res => res.json());
 
   getImage = (imageId: string) =>
     this.authHttp.get(`${this.serverconfig.poiURI}/image/${imageId}`).toPromise();
 
 
-
-  getUser = (userID:string):Promise<ProfileUser> =>
+  getUser = (userID: string): Promise<ProfileUser> =>
     this.authHttp.get(`${this.serverconfig.userURI}/${userID}`).toPromise()
-      .then(res=>res.json());
+      .then(res => res.json());
 
 
   updateUser = (userID: string, user: ProfileUser): Promise<ProfileUser> =>
@@ -143,7 +151,6 @@ export class Tlog {
     });
     toast.present();
   }
-
 
 
   getImageURL = (imageId: string): Promise<string> => new Promise((resolve, reject) => {

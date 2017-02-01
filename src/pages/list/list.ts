@@ -4,7 +4,7 @@ import {NavController, NavParams, AlertController, LoadingController} from 'ioni
 
 import {Security} from '../../providers/security';
 import {LoginPage} from "../login/login";
-import {Trip, ReceiveFriendRequest} from "../../models/models";
+import {Trip, ReceiveFriendRequest, Notification} from "../../models/models";
 import {Tlog} from "../../providers/tlog";
 import {AddTripPage} from "../add-trip/add-trip";
 import {TripPage} from "../trip/trip";
@@ -20,6 +20,7 @@ export class ListPage {
   icons: string[];
   items: Array<Trip>;
   newFriendRequests:ReceiveFriendRequest[]=[];
+  newNotifications:Notification[]=[];
 
 
   constructor(public navCtrl: NavController,
@@ -62,7 +63,9 @@ export class ListPage {
 
   checkNotifications = ()=>{
     this.tLogService.openFriendRequest()
-      .then(res=>this.newFriendRequests=res)
+      .then(res=>{this.newFriendRequests=res;
+        this.tLogService.getNotifications()
+          .then(notifications=>this.newNotifications=notifications)})
       .catch(err => {
         this.showAlert("Error", `Could not check for new notifications: ${err.message || err}`);
       });
@@ -83,10 +86,11 @@ export class ListPage {
     });
   }
 
-  showFriendRequests = ()=>{
+  showRequests = ()=>{
     console.log("Open Requests: "+this.newFriendRequests.length);
     this.navCtrl.push(FriendRequestNotificationPage, {
-      friendRequests: this.newFriendRequests
+      friendRequests: this.newFriendRequests,
+      notifications: this.newNotifications
     });
   }
 }
