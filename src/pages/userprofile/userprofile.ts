@@ -6,6 +6,8 @@ import {Security} from "../../providers/security";
 import {Tlog} from "../../providers/tlog";
 import {Serverconfig} from "../../providers/serverconfig";
 import {ListPage} from "../list/list";
+import {AddImagePage} from "../add-image/add-image";
+import {AddUserImagePage} from "../add-user-image/add-user-image";
 
 /*
  Generated class for the Userprofile page.
@@ -89,6 +91,8 @@ export class UserProfile {
       .then(res=>{this.user=res; this.navCtrl.setRoot(ListPage)})
       .catch(err=>this.showAlert("Error","Could not change the user"));
   }
+
+  addImage = () => this.navCtrl.push(AddUserImagePage, {user: this.user, userID: this.user._id});
 
 
   validationMessages = {

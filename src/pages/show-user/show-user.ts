@@ -64,9 +64,12 @@ export class ShowUserPage {
     this.security.getUser()
       .then(user =>  {friendRequest.userFrom=user.id;
         this.tlog.sendFriendRequest(friendRequest)
-          .then(res => {this.count=1;this.showAlert("INFO","Request has been send")})})
+          .then(res => {this.count=1;
+            this.tlog.presentToast("Request has been send");
+          })})
       .catch(err => this.showAlert("ERROR",`Couldn't send request ${err.json().message}`))
   }
+
 
   removeFriend = () =>{
     this.tlog.removeFriend(this.navParams.get("user"))

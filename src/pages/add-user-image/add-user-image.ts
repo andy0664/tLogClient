@@ -3,7 +3,7 @@ import {NavController, AlertController, NavParams, LoadingController} from 'ioni
 import {Camera, Transfer, CameraOptions} from "ionic-native";
 import {Serverconfig} from "../../providers/serverconfig";
 import {Security} from "../../providers/security";
-import {POI} from "../../models/models";
+import {ProfileUser} from "../../models/models";
 
 /*
  Generated class for the AddImage page.
@@ -12,10 +12,18 @@ import {POI} from "../../models/models";
  Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-add-image',
-  templateUrl: 'add-image.html'
+  selector: 'page-add-user-image',
+  templateUrl: 'add-user-image.html'
 })
-export class AddImagePage {
+export class AddUserImagePage {
+
+  constructor(public navCtrl: NavController,
+              private alertCtrl: AlertController,
+              private navParams: NavParams,
+              private security: Security,
+              private loading: LoadingController,
+              private  serverconfig: Serverconfig) {
+  }
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
     title: title,
@@ -23,7 +31,8 @@ export class AddImagePage {
     buttons: ['OK']
   }).present();
 
-  poi: POI;
+  user: ProfileUser;
+  image: any = null;
 
   mode: string;
 
@@ -44,21 +53,12 @@ export class AddImagePage {
     this.security.getToken()
       .then(token =>
         new Transfer().upload(this.image,
-          `${this.serverconfig.poiURI}/${this.poi._id}/image`,
+          `${this.serverconfig.userURI}/${this.user._id}/image`,
           {params: {description: this.description}, headers: {authorization: `Bearer ${token}`}}))
       .then(() => {loader.dismiss();this.navCtrl.pop()})
       .catch(err => {loader.dismiss();this.showAlert("ERROR", `Could not upload image (${err.body})`)});
   };
 
-  image: any = null;
-
-  constructor(public navCtrl: NavController,
-              private alertCtrl: AlertController,
-              private navParams: NavParams,
-              private security: Security,
-              private loading: LoadingController,
-              private  serverconfig: Serverconfig) {
-  }
 
 
   getPicture = (option:CameraOptions) => () => {
@@ -75,7 +75,8 @@ export class AddImagePage {
   selectPicture = this.getPicture(this.selectPhotoOptions);
 
   ngOnInit() {
-    this.poi = this.navParams.get("poi");
+    this.user = this.navParams.get("user");
+    console.log(JSON.stringify(this.user))
   }
 
 }

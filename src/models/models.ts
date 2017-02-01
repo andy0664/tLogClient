@@ -54,13 +54,13 @@ export class POI {
 export class ProfileUser {
   _id?:string;
   friends?:Friend[];
-  images?: Image[];
   tripNotifications?:boolean;
   local?:{
     password:string;
     email:string;
     username:string};
   roles:string[];
+  images: Image[];
 }
 
 

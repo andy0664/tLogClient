@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><p>{{user.local.username || Test}}</p></ion-title>
+    <ion-title><p>{{user.local.username}}</p></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -37,6 +37,7 @@
     <ion-toggle [(ngModel)]="user.tripNotifications"></ion-toggle>
   </ion-item>
   <button (click)="change()"  ion-button [disabled]="!userForm.valid">Save Changes</button>
+  <button (click)="addImage()"  ion-button [disabled]="!userForm.valid">Add Image</button>
 
 </ion-content>
 

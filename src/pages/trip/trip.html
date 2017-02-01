@@ -26,8 +26,8 @@
 
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="changeLikeState()" >
-        <ion-icon  class="heard" name="heart" *ngIf="like===1"></ion-icon>
-        <ion-icon  class="heard" name="heart-outline" *ngIf="like!==1"></ion-icon>
+        <ion-icon tabBadge="14" tabBadgeStyle="danger" class="heard" name="heart" *ngIf="like>=1"></ion-icon>
+        <ion-icon  class="heard" name="heart-outline" *ngIf="like===0"></ion-icon>
         <ion-label>{{likeCount}}</ion-label>
       </button>
     </ion-buttons>

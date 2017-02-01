@@ -23,9 +23,13 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item._id)">
-      <i class="fa fa-map-signs" aria-hidden="true"></i>
+    <ion-item ion-item detail-push *ngFor="let item of items" (click)="itemTapped($event, item._id)">
+      <ion-icon name="map" icon-left></ion-icon>
       {{item.name}}
-    </button>
+      <!--<ion-note item-right>
+        {{item.createdAt}}
+      </ion-note>-->
+    </ion-item>
+
   </ion-list>
 </ion-content>

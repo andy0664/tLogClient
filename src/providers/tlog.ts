@@ -8,6 +8,7 @@ import {
   NewComment, TopTenTripResult, ProfileUser
 } from '../models/models';
 import {Security} from "./security";
+import { ToastController } from 'ionic-angular';
 
 
 /*
@@ -21,7 +22,8 @@ export class Tlog {
 
   constructor(private authHttp: AuthHttp,
               private serverconfig: Serverconfig,
-              private security: Security) {
+              private security: Security,
+              public toastCtrl: ToastController) {
 
   }
 
@@ -134,6 +136,14 @@ export class Tlog {
     this.authHttp.patch(`${this.serverconfig.userURI}/${user._id}`, user)
       .toPromise().then(res => res.json());
 
+  presentToast(msg:string) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    toast.present();
+  }
+
 
 
   getImageURL = (imageId: string): Promise<string> => new Promise((resolve, reject) => {
@@ -156,5 +166,7 @@ export class Tlog {
         xhr.send();
       });
   });
+
+
 
 }

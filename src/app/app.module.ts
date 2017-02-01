@@ -28,6 +28,7 @@ import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
 import {Geocoder} from "../providers/geocoder";
 import {ListTopTripsPage} from "../pages/list-top-trips/list-top-trips";
 import {UserProfile} from "../pages/userprofile/userprofile";
+import {AddUserImagePage} from "../pages/add-user-image/add-user-image";
 
 
 
@@ -63,7 +64,8 @@ export function getAuthHttp(http) {
     AddCommentPage,
     TestGeocodingPage,
     ListTopTripsPage,
-    UserProfile
+    UserProfile,
+    AddUserImagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp), ReactiveFormsModule
@@ -89,7 +91,8 @@ export function getAuthHttp(http) {
     AddCommentPage,
     TestGeocodingPage,
     ListTopTripsPage,
-    UserProfile
+    UserProfile,
+    AddUserImagePage
   ],
   providers: [Security,
     {
