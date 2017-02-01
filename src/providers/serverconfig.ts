@@ -31,6 +31,11 @@ export class Serverconfig {
   private _rejectFriendRequest = `${this.host}/user/rejectRequest`;
   private _userFriendURI = `${this.host}/user/getFriends`;
 
+  private _checkNotificationURI = `${this.host}/user/checkNotification`;
+  private _readNotificationURI = `${this.host}/user/readNotification`;
+
+
+
   private _commentsURI = `${this.host}/comment/all`;
   private _addCommentURI = `${this.host}/comment`;
 
@@ -64,6 +69,8 @@ export class Serverconfig {
   public get addCommentURI(){return this._addCommentURI};
   public get tripByLocationURI(){return this._tripByLocationURI};
   public get topTenTripURI(){return this._topTenTripURI};
+  public get checkNotificationURI(){return this._checkNotificationURI};
+  public get readNotificationURI(){return this._readNotificationURI};
 
   constructor() {
   }

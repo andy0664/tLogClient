@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
-import {ReceiveFriendRequest} from "../../models/models";
+import {ReceiveFriendRequest, Notification} from "../../models/models";
 import {Security} from "../../providers/security";
 import {Tlog} from "../../providers/tlog";
+import {TripPage} from "../trip/trip";
 
 /*
-  Generated class for the FriendRequestNotification page.
+ Generated class for the FriendRequestNotification page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ See http://ionicframework.com/docs/v2/components/#navigation for more info on
+ Ionic pages and navigation.
+ */
 @Component({
   selector: 'page-friend-request-notification',
   templateUrl: 'friend-request-notification.html'
 })
 export class FriendRequestNotificationPage {
 
-  friendRequests:ReceiveFriendRequest[]=[];
+  friendRequests: ReceiveFriendRequest[] = [];
+  notifications: Notification[] = [];
 
   constructor(public navCtrl: NavController,
-  public navParams: NavParams,
-  private tlog: Tlog,
-  private alertCtrl: AlertController,
-  private security:Security) {}
+              public navParams: NavParams,
+              private tlog: Tlog,
+              private alertCtrl: AlertController,
+              private security: Security) {
+  }
 
-  ionViewDidLoad() {
-    console.log('Hello FriendRequestNotificationPage Page');
-    this.friendRequests=this.navParams.get("friendRequests");
+  ionViewWillEnter() {
+    this.friendRequests = this.navParams.get("friendRequests");
+    this.notifications = this.navParams.get("notifications");
   }
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
@@ -35,22 +38,37 @@ export class FriendRequestNotificationPage {
     buttons: ['OK']
   }).present();
 
-  accept = (userID:string)=>{
+  accept = (userID: string) => {
     this.tlog.acceptFriendRequest(userID)
-      .then(()=>this.removeRequest())
-      .catch(err=>this.showAlert("Error", `Could not send request: ${err.message || err}`))
+      .then(() => this.removeRequest())
+      .catch(err => this.showAlert("Error", `Could not send request: ${err.message || err}`))
   }
 
-  reject = (userID:string)=>{
+  reject = (userID: string) => {
     this.tlog.rejectFriendRequest(userID)
-      .then(()=>this.removeRequest())
-      .catch(err=>this.showAlert("Error", `Could not send request: ${err.message || err}`))
+      .then(() => this.removeRequest())
+      .catch(err => this.showAlert("Error", `Could not send request: ${err.message || err}`))
   }
 
-  removeRequest = ()=>{
+  removeRequest = () => {
     this.tlog.openFriendRequest()
-      .then((res)=>this.friendRequests=res)
-      .catch(err=>this.showAlert("Error", `Problem to update friend requests: ${err.message || err}`))
+      .then((res) => this.friendRequests = res)
+      .catch(err => this.showAlert("Error", `Problem to update friend requests: ${err.message || err}`))
+  }
+
+  displayTrip = (tripID: string, notificationID: string) => {
+    console.log("show trip");
+    this.tlog.readNotification(notificationID)
+      .then(res => this.navCtrl.push(TripPage, {
+        trip: tripID
+      }))
+      .catch(err => this.showAlert("Error", `There seems to be a problem: ${err.message || err}`))
+  }
+
+  removeNotification = (notificationID:string)=>{
+    this.tlog.readNotification(notificationID)
+      .then(res => this.notifications = this.notifications.filter(notification=>notification._id!==notificationID))
+      .catch(err => this.showAlert("Error", `There seems to be a problem: ${err.message || err}`));
   }
 
 }

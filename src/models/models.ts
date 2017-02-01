@@ -63,6 +63,14 @@ export class ProfileUser {
   roles:string[];
 }
 
+export class Notification{
+  _id?:string;
+  userTo?:{_id:string,local:{username:string}};
+  userFrom?:{_id:string,local:{username:string}};
+  trip?:{_id:string,name:string};
+  createdAt?:Date;
+}
+
 
 export class Trip {
   _id?: string;
