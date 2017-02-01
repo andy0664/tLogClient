@@ -60,7 +60,7 @@ export class TripPage {
      });*/
   }
 
-  presentPOIActionSheet = (poi: POI): ActionSheet =>
+  presentPOIActionSheetOwner = (poi: POI): ActionSheet =>
     this.asCtrl.create({
       //title: 'Modify your album',
       buttons: [
@@ -90,7 +90,27 @@ export class TripPage {
       ]
     }).present();
 
-  presentNewPOIActionSheet = () => {
+
+  presentPOIActionSheet = (poi: POI): ActionSheet =>
+    this.asCtrl.create({
+      //title: 'Modify your album',
+      buttons: [
+        {
+          text: 'Show Details',
+          handler: () => {
+            this.showPoi(poi);
+          }
+        },
+         {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        }
+      ]
+    }).present();
+
+  /*presentNewPOIActionSheet = () => {
     let actionSheet = this.asCtrl.create({
       //title: 'Modify your album',
       buttons: [
@@ -109,7 +129,7 @@ export class TripPage {
       ]
     });
     actionSheet.present();
-  };
+  };*/
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
     title: title,
@@ -135,13 +155,7 @@ export class TripPage {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-
-    if(this.isOwner){
-      this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
-    } else if(this.isOwner===false){
-      this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
-    }
-
+    this.markers = this.trip.pois.map(poi => this.poiToCoords(poi).bindPopup(`<h4>${poi.name}</h4><p>${poi.description}</p>`));
     this.path = new L.Polyline(this.markers.map(m => m.getLatLng()));
     this.map.addLayer(this.path);
     this.markers.forEach(m => m.addTo(this.map));
@@ -176,9 +190,10 @@ export class TripPage {
 
   onPopupOpen = (poi: POI) => (e: L.LeafletPopupEvent) => {
     this.map.panTo(e.target.getLatLng());
-    if(this.isOwner){
+    if(this.isOwner)
+      this.presentPOIActionSheetOwner(poi);
+    else
       this.presentPOIActionSheet(poi);
-    }
   };
 
 
@@ -230,7 +245,7 @@ export class TripPage {
             loading.dismiss(); this.showAlert("INFO","Could not load comments.");
           })
 
-        this.security.isOwner(this.trip.creator.local.username)
+        this.security.isOwner(this.trip.creator._id)
           .then((res: boolean) => {
             this.isOwner = res;
             this.tlog.checkLikeTrip(this.trip._id)
