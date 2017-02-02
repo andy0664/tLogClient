@@ -6,8 +6,8 @@ import {Security} from "../../providers/security";
 import {Tlog} from "../../providers/tlog";
 import {Serverconfig} from "../../providers/serverconfig";
 import {ListPage} from "../list/list";
-import {AddImagePage} from "../add-image/add-image";
 import {AddUserImagePage} from "../add-user-image/add-user-image";
+import {SafeUrl, DomSanitizer} from "@angular/platform-browser";
 
 /*
  Generated class for the Userprofile page.
@@ -26,6 +26,9 @@ export class UserProfile {
   userForm: FormGroup;
   user: ProfileUser = new ProfileUser();
 
+  images: SafeUrl[];
+
+
   constructor(public navCtrl: NavController,
               private fb:FormBuilder,
               private security: Security,
@@ -33,6 +36,7 @@ export class UserProfile {
               private alertCtrl: AlertController,
               private loading: LoadingController,
               private serverconfig: Serverconfig,
+              private sanitizer: DomSanitizer,
               private tlog: Tlog) {}
 
   onSubmit() {
@@ -41,6 +45,8 @@ export class UserProfile {
 
   ionViewWillEnter() {
   }
+
+
 
   buildForm(): void {
     this.user.local={password:"",username:"",email:""};
@@ -52,14 +58,24 @@ export class UserProfile {
   }
 
   ngOnInit(): void {
-
     this.buildForm();
     this.userForm.valueChanges
       .subscribe(data => this.onValueChanged(data))
     this.security.getUser().then(user=>this.tlog.getUser(user.id)
-      .then(user=>this.user=user))
+      .then(user=>{
+        this.user=user;
+        this.getImages();
+      }))
       .catch(err=>this.showAlert("Error","Could not change the the user"));
+
+
   }
+
+
+  getImages = () =>  Promise.all(this.user.images.map((image) => this.tlog.getImageURL(image.id)
+    .then((url=>this.sanitizer.bypassSecurityTrustUrl(url)))))
+    .then(urls => urls.forEach((url,i)=>this.user.images[i].url=url));
+
 
   onValueChanged(data?: any){
     if (!this.userForm) return;

@@ -14,8 +14,10 @@
 
 
 <ion-content padding>
-  <--<ion-list>
-</ion-list>
+  <ion-list>
+    <ion-item>Take a image or select one from your gallery.</ion-item>
+  </ion-list>
+
   <button ion-button (click)="takePhoto()" icon-left>
     <ion-icon name="camera"> </ion-icon> Take Image
   </button>
@@ -27,5 +29,5 @@
   </button>
   <ion-card *ngIf="image">
     <img [src]="image" />
-  </ion-card>-->
+  </ion-card>
 </ion-content>

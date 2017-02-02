@@ -29,6 +29,7 @@ export class FriendRequest{
 export class Friend{
   _id?:string;
   local:{username:string};
+  url?: SafeUrl;
 }
 
 export class ReceiveFriendRequest{

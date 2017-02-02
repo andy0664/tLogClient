@@ -3,6 +3,7 @@ import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
 import {User, FriendRequest} from "../../models/models";
 import {Security} from "../../providers/security";
+import {SafeUrl} from "@angular/platform-browser";
 
 /*
  Generated class for the ShowUser page.
@@ -18,6 +19,7 @@ export class ShowUserPage {
 
   user: User = new User();
   count: number;
+  url: SafeUrl;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -29,6 +31,7 @@ export class ShowUserPage {
   ngOnInit(): void {
     console.log('Hello ShowUser Page to show: ' + this.navParams.get("user"));
     this.initUser();
+    this.url = this.navParams.get("url");
   }
 
   initUser = ()=>{

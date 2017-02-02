@@ -23,8 +23,8 @@
 
 <ion-content>
   <ion-list>
-    <ion-item ion-item detail-push *ngFor="let item of items" (click)="itemTapped($event, item._id)">
-      <ion-icon name="map" icon-left></ion-icon>
+    <ion-item *ngFor="let item of items" (click)="itemTapped($event, item._id)">
+      <ion-icon item-left name="map"></ion-icon>
       {{item.name}}
       <!--<ion-note item-right>
         {{item.createdAt}}

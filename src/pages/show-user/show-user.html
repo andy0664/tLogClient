@@ -18,8 +18,14 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <img [src]="url" >
+    </ion-card-content>
+  </ion-card>
   <h4>Friends:</h4>
   <ion-list>
+
     <ion-item *ngFor="let friend of user.friends">
       <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
       {{friend.local.username}}
