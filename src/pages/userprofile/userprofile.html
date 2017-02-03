@@ -43,7 +43,7 @@
         </ion-row>
       </ion-card>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="user.local.username" formControlName="username"></ion-input>
+        <ion-input readonly="true" [(ngModel)]="user.local.username" formControlName="username"></ion-input>
       </ion-item>
       <ion-item *ngIf="formErrors.username" class="item-md-danger">
         <p>{{ formErrors.username }}</p>

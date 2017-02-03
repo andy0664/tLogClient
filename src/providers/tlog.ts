@@ -144,6 +144,16 @@ export class Tlog {
     this.authHttp.patch(`${this.serverconfig.userURI}/${user._id}`, user)
       .toPromise().then(res => res.json());
 
+
+  removePoi = (poiID:string): Promise<boolean> =>
+    this.authHttp.delete(`${this.serverconfig.removePoiURI}/${poiID}`)
+      .toPromise().then(res => true);
+
+  removeTrip = (tripID: string): Promise<boolean> =>
+    this.authHttp.delete(`${this.serverconfig.removeTripURI}/${tripID}`)
+      .toPromise().then(res => true);
+
+
   presentToast(msg:string) {
     let toast = this.toastCtrl.create({
       message: msg,

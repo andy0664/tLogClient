@@ -37,6 +37,8 @@ export class TripPage {
   likeCount: number;
   comments:Array<Component>=[];
   commentCount: number;
+  removePoiType=1;
+  removeTripType=2;
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -81,6 +83,11 @@ export class TripPage {
             this.addImage(poi);
           }
         }, {
+          text: 'Remove POI',
+          handler: () => {
+            this.startRemovePoi(poi);
+          }
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -110,26 +117,30 @@ export class TripPage {
       ]
     }).present();
 
-  /*presentNewPOIActionSheet = () => {
-    let actionSheet = this.asCtrl.create({
-      //title: 'Modify your album',
+  showConfirm(message:string,id:string,type:number) {
+    let confirm = this.alertCtrl.create({
+      message: message,
       buttons: [
         {
-          text: 'Add POI',
+          text: 'No',
           handler: () => {
-            this.addPOI();
           }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
+        },
+        {
+          text: 'Yes',
           handler: () => {
-
+            switch (type){
+              case this.removePoiType:
+                  this.removePoi(id);break;
+              case this.removeTripType:
+                this.removeTrip();break;
+            }
           }
         }
       ]
     });
-    actionSheet.present();
-  };*/
+    confirm.present();
+  }
 
   showAlert = (title: string, message: string) => this.alertCtrl.create({
     title: title,
@@ -206,6 +217,26 @@ export class TripPage {
         coordinates: {lng: poi.loc.coordinates[0], lat: poi.loc.coordinates[1]}
       });
   };
+
+  startRemovePoi = (poi:POI) =>{
+    this.showConfirm('You want to delete this POI?',poi._id,this.removePoiType);
+  }
+
+  startRemoveTrip = () =>{
+    this.showConfirm('You want to delete this Trip?',this.trip._id,this.removeTripType);
+  }
+
+  removePoi = (poiID:string)=>{
+    this.tlog.removePoi(poiID)
+      .then(()=>{this.showAlert('INFO','POI removed'); this.ionViewWillEnter()})
+      .catch((err)=>this.showAlert('ERROR',`Problem to remove this POI ${err.message}`))
+  }
+
+  removeTrip = () =>{
+    this.tlog.removeTrip(this.trip._id)
+      .then(()=>this.navCtrl.pop())
+      .catch((err)=>this.showAlert('ERROR',`Problem to remove this Trip ${err.message}`))
+  }
 
   showPoi = (poi) => this.navCtrl.push(ShowPoiPage, {
     poi: poi

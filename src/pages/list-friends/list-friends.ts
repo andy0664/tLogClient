@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import {Security} from "../../providers/security";
 import {Tlog} from "../../providers/tlog";
-import {Friend, ProfileUser} from "../../models/models";
+import {Friend} from "../../models/models";
 import {ShowUserPage} from "../show-user/show-user";
 import {SafeUrl, DomSanitizer} from "@angular/platform-browser";
 

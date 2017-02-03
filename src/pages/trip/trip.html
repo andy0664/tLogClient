@@ -48,6 +48,11 @@
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons end>
+      <button *ngIf="isOwner" ion-button icon-only color="royal" (click)="startRemoveTrip()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
