@@ -37,6 +37,7 @@ export class TripPage {
   likeCount: number;
   comments:Array<Component>=[];
   commentCount: number;
+  creator:string;
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -231,6 +232,9 @@ export class TripPage {
     this.tlog.loadTrip(this.navParams.get("trip"))
       .then(trip => {
         this.trip = trip;
+        console.log(this.trip.creator.local.username)
+        this.creator = this.trip.creator.local.username
+        console.log(this.creator)
         this.likeCount = this.trip.likes.length;
 
         const loading = this.loadingCtrl.create({
@@ -306,7 +310,8 @@ export class TripPage {
     console.log("write comment");
     this.navCtrl.push(ShowCommentsPage, {
       tripID: this.trip._id,
-      trip: this.trip
+      trip: this.trip,
+      creator: this.creator
     });
   }
 

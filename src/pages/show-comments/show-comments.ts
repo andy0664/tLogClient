@@ -17,6 +17,7 @@ export class ShowCommentsPage {
 
   comments:Array<Component>=[];
   tripID:string;
+  creator:string;
 
   constructor(public navCtrl: NavController,private alertCtrl: AlertController,
               public navParams: NavParams,
@@ -34,9 +35,17 @@ export class ShowCommentsPage {
     const loading = this.loadingCtrl.create({
       content: "Fetching comments"
     });
+    this.creator = this.navParams.get("creator");
+    console.log("Creator: "+ this.creator)
     this.tripID=this.navParams.get("tripID");
     this.tlog.loadTripComments(this.tripID)
-      .then(res=>{loading.dismiss();this.comments=res})
+      .then(res=>{
+        loading.dismiss();
+        this.comments=res
+
+
+
+      })
       .catch(err => {
         loading.dismiss(); this.showAlert("INFO","Could not load comments.");
       })

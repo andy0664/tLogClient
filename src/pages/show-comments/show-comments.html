@@ -21,10 +21,25 @@
 
 
 <ion-content padding>
-  <ion-list>
+
     <ion-item *ngFor="let comment of comments">
-      <ion-label stacked>{{comment.creator.local.username}}:</ion-label>
-      <ion-input readonly="true" [(ngModel)]="comment.comment"></ion-input>
+      <ion-card>
+        <ion-row>
+          <ion-col item-left *ngIf="creator === comment.creator.local.username" >
+            <p style="color: #3a4aff"><b>{{comment.creator.local.username}}</b></p>
+          </ion-col>
+          <ion-col item-left *ngIf="creator != comment.creator.local.username" >
+            <p style="color: #ffa54d"><b>{{comment.creator.local.username}}</b></p>
+          </ion-col>
+          <ion-col item-right>
+            <p>{{comment.createdAt}}</p>
+          </ion-col>
+        </ion-row>
+      <ion-card-content>
+
+        <p>{{comment.comment}}</p>
+      </ion-card-content>
+      </ion-card>
     </ion-item>
-  </ion-list>
+
 </ion-content>

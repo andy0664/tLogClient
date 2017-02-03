@@ -18,17 +18,24 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card >
     <ion-card-content>
-      <img [src]="url" >
+      <img  [src]="url" >
     </ion-card-content>
   </ion-card>
   <h4>Friends:</h4>
   <ion-list>
 
-    <ion-item *ngFor="let friend of user.friends">
+    <!--<ion-item *ngFor="let friend of user.friends">
       <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
       {{friend.local.username}}
+    </ion-item>-->
+
+    <ion-item *ngFor="let friend of user.friends"  (click)="userClicked(friend._id, friend.url)">
+
+        <ion-icon item-left ><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
+
+      <h2>{{friend.local.username}}</h2>
     </ion-item>
   </ion-list>
   <h4>Trips:</h4>

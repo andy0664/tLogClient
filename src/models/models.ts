@@ -1,7 +1,5 @@
 import {SafeUrl} from "@angular/platform-browser";
-/**
- * Created by salho on 18.11.16.
- */
+
 export class User {
   id?:string;
   username: string;
@@ -10,6 +8,7 @@ export class User {
   friends?:User[];
   local?:{username:string};
   trips?:[{_id:string,name:string}];
+  url?: SafeUrl;
 }
 
 export interface Image {
@@ -89,6 +88,7 @@ export class Trip {
 export class NewComment{
   trip:string;
   comment:string;
+  createdAt:Date;
 }
 
 export class GeoLocation{

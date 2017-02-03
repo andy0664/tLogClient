@@ -3,7 +3,7 @@ import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
 import {User, FriendRequest} from "../../models/models";
 import {Security} from "../../providers/security";
-import {SafeUrl} from "@angular/platform-browser";
+import {SafeUrl, DomSanitizer} from "@angular/platform-browser";
 
 /*
  Generated class for the ShowUser page.
@@ -25,6 +25,7 @@ export class ShowUserPage {
               public navParams: NavParams,
               private tlog: Tlog,
               private alertCtrl: AlertController,
+              private sanitizer: DomSanitizer,
               private security: Security) {
   }
 
@@ -38,7 +39,22 @@ export class ShowUserPage {
     this.tlog.loadOtherUser(this.navParams.get("user"))
       .then(user => {
         this.user = user;
-        console.log(this.user)
+        /*for(let friend of this.user.friends){
+          this.tlog.getUser(friend.id)
+            .then(user=>{
+              console.log(JSON.stringify(user))
+              //friend.image = user.images[0]
+
+              Promise.all(user.images.map((image) => {
+                console.log(image.id);
+                this.tlog.getImageURL(image.id)
+                  .then((url=>{
+                    friend.url = this.sanitizer.bypassSecurityTrustUrl(url)
+                  }))
+              }))
+            });
+
+        }*/
       })
       .catch(err => this.showAlert("Error", "Could not load the specific user"));
     this.tlog.checkFriend(this.navParams.get("user"))
