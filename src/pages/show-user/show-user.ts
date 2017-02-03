@@ -4,6 +4,8 @@ import {Tlog} from "../../providers/tlog";
 import {User, FriendRequest} from "../../models/models";
 import {Security} from "../../providers/security";
 import {SafeUrl, DomSanitizer} from "@angular/platform-browser";
+import {SafeUrl} from "@angular/platform-browser";
+import {TripPage} from "../trip/trip";
 
 /*
  Generated class for the ShowUser page.
@@ -20,6 +22,7 @@ export class ShowUserPage {
   user: User = new User();
   count: number;
   url: SafeUrl;
+  userID:string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -31,12 +34,13 @@ export class ShowUserPage {
 
   ngOnInit(): void {
     console.log('Hello ShowUser Page to show: ' + this.navParams.get("user"));
+    this.userID=this.navParams.get("user");
     this.initUser();
     this.url = this.navParams.get("url");
   }
 
   initUser = ()=>{
-    this.tlog.loadOtherUser(this.navParams.get("user"))
+    this.tlog.loadOtherUser(this.userID)
       .then(user => {
         this.user = user;
         /*for(let friend of this.user.friends){
@@ -57,7 +61,7 @@ export class ShowUserPage {
         }*/
       })
       .catch(err => this.showAlert("Error", "Could not load the specific user"));
-    this.tlog.checkFriend(this.navParams.get("user"))
+    this.tlog.checkFriend(this.userID)
       .then(res => this.count=res)
       .catch(err => this.showAlert("ERROR",`Problem checking if already a friend ${err.json().message}`))
   }
@@ -79,7 +83,7 @@ export class ShowUserPage {
   friendRequest = () =>{
     console.log("Send Friend request");
     let friendRequest = new FriendRequest();
-    friendRequest.userTo=this.navParams.get("user")
+    friendRequest.userTo=this.userID;
     this.security.getUser()
       .then(user =>  {friendRequest.userFrom=user.id;
         this.tlog.sendFriendRequest(friendRequest)
@@ -91,9 +95,22 @@ export class ShowUserPage {
 
 
   removeFriend = () =>{
-    this.tlog.removeFriend(this.navParams.get("user"))
+    this.tlog.removeFriend(this.userID)
       .then(res => this.initUser())
       .catch(err => this.showAlert("ERROR",`Couldn't remove friend ${err.json().message}`))
+  }
+
+  showTrip = (tripID:string)=>{
+    this.navCtrl.push(TripPage, {
+      trip: tripID
+    });
+  }
+
+  showFriend = (friendID:string,url:SafeUrl)=>{
+    console.log("Show Friend");
+    this.userID=friendID;
+    this.url = url;
+    this.initUser();
   }
 
 

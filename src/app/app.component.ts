@@ -37,8 +37,7 @@ export class MyApp {
       { title: 'My Trips', component: ListPage },
       { title: 'Search', component: SearchPage },
       { title: 'My Friends', component: ListFriendsPage },
-      { title: 'Top 10 Trips', component: ListTopTripsPage },
-      { title: 'Test Geocoding', component: TestGeocodingPage }
+      { title: 'Top 10 Trips', component: ListTopTripsPage }
     ];
   }
 

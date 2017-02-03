@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Serverconfig {
 
-  private _host = "http://10.0.0.2:3000/api";
+  private _host = "http://127.0.0.1:3000/api";
   private _loginURI = `${this._host}/auth/login`;
   private _logoutURI = `${this._host}/auth/logout`;
   private _registerURI = `${this._host}/auth/signup`;
@@ -19,6 +19,9 @@ export class Serverconfig {
   private _tripSearchURI = `${this._host}/trip/search`;
   private _tripByLocationURI = `${this._host}/trip/findByLocation`;
   private _poiURI = `${this.host}/poi`;
+  private _removePoiURI = `${this.host}/poi`;
+  private _removeTripURI = `${this.host}/trip`;
+
 
   private _userURI = `${this.host}/user`;
   private _userOtherURI = `${this.host}/user/other`;
@@ -71,6 +74,8 @@ export class Serverconfig {
   public get topTenTripURI(){return this._topTenTripURI};
   public get checkNotificationURI(){return this._checkNotificationURI};
   public get readNotificationURI(){return this._readNotificationURI};
+  public get removePoiURI(){return this._removePoiURI};
+  public get removeTripURI(){return this._removeTripURI};
 
   constructor() {
   }

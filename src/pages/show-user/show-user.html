@@ -26,21 +26,14 @@
   <h4>Friends:</h4>
   <ion-list>
 
-    <!--<ion-item *ngFor="let friend of user.friends">
+    <ion-item *ngFor="let friend of user.friends" (click)="showFriend(friend._id,friend.url)">
       <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
       {{friend.local.username}}
-    </ion-item>-->
-
-    <ion-item *ngFor="let friend of user.friends"  (click)="userClicked(friend._id, friend.url)">
-
-        <ion-icon item-left ><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
-
-      <h2>{{friend.local.username}}</h2>
     </ion-item>
   </ion-list>
   <h4>Trips:</h4>
   <ion-list>
-    <ion-item *ngFor="let trip of user.trips">
+    <ion-item *ngFor="let trip of user.trips" (click)="showTrip(trip._id)">
       <ion-icon name="map"></ion-icon>
       {{trip.name}}
     </ion-item>
