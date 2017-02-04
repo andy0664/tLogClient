@@ -8,7 +8,6 @@ import { ListPage } from '../pages/list/list';
 import {LoginPage} from "../pages/login/login";
 import {SearchPage} from "../pages/search/search";
 import {ListFriendsPage} from "../pages/list-friends/list-friends";
-import {TestGeocodingPage} from "../pages/test-geocoding/test-geocoding";
 import {ListTopTripsPage} from "../pages/list-top-trips/list-top-trips";
 import {UserProfile} from "../pages/userprofile/userprofile";
 

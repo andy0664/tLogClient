@@ -2,6 +2,7 @@ import {SafeUrl} from "@angular/platform-browser";
 
 export class User {
   id?:string;
+  _id?:string;
   username: string;
   password: string;
   email: string;

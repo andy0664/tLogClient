@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>{{user.username || "UsernameTest"}}</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only end (click)="friendAction()" >
+        <button ion-button icon-only end (click)="friendAction()" *ngIf="ownProfile===false" >
           <ion-icon *ngIf="count===0"><i class="fa fa-user-plus" aria-hidden="true"></i></ion-icon>
           <ion-icon *ngIf="count!==0"><i class="fa fa-user-times" aria-hidden="true"></i></ion-icon>
         </button>
