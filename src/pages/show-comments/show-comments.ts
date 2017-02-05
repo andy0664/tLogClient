@@ -44,7 +44,7 @@ export class ShowCommentsPage {
         loading.dismiss();
         this.comments=res
         for(let comment of this.comments){
-          comment.createdAtString =  comment.createdAt.toLocaleString().slice(11,16) + ", " + comment.createdAt.toLocaleString().slice(0,10);
+          comment.createdAtString =  comment.createdAt.toLocaleString().slice(11,16) + ", " + comment.createdAt.toLocaleString().slice(0,10).split("-").reverse().join(".").toString();;
         }
 
 

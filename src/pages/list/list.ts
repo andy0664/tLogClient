@@ -52,7 +52,8 @@ export class ListPage {
       .then(trips => {
         this.items = trips;
         for(let item of this.items){
-          item.createdAtString =  item.createdAt.toLocaleString().slice(0,10);
+          item.beginString =  item.begin.toLocaleString().slice(0,10).split("-").reverse().join(".").toString();
+          item.endString =  item.end.toLocaleString().slice(0,10).split("-").reverse().join(".").toString();
         }
 
       }).then(() => {

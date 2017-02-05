@@ -84,7 +84,8 @@ export class Trip {
   creator?: {_id:string, local: {username:string}};
   pois?:[POI];
   likes?:[{_id:string,local:{username:string}}];
-  createdAtString:string;
+  beginString?:string;
+  endString?:string;
 }
 
 export class NewComment{
