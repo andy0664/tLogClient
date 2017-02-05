@@ -18,6 +18,7 @@
 
 <ion-content padding>
   <ion-list >
+    <p *ngIf="friends.length === 0">No friends available</p>
     <ion-item *ngFor="let friend of friends"  (click)="userClicked(friend._id, friend.url)">
       <ion-avatar item-left >
         <img *ngIf="friend.url" [src]="friend.url">
