@@ -28,7 +28,6 @@ export class UserProfile {
 
   images: SafeUrl[];
 
-
   constructor(public navCtrl: NavController,
               private fb:FormBuilder,
               private security: Security,
@@ -40,13 +39,10 @@ export class UserProfile {
               private tlog: Tlog) {}
 
   onSubmit() {
-
   }
 
   ionViewWillEnter() {
   }
-
-
 
   buildForm(): void {
     this.user.local={password:"",username:"",email:""};
@@ -67,15 +63,11 @@ export class UserProfile {
         this.getImages();
       }))
       .catch(err=>this.showAlert("Error","Could not change the the user"));
-
-
   }
-
 
   getImages = () =>  Promise.all(this.user.images.map((image) => this.tlog.getImageURL(image.id)
     .then((url=>this.sanitizer.bypassSecurityTrustUrl(url)))))
     .then(urls => urls.forEach((url,i)=>this.user.images[i].url=url));
-
 
   onValueChanged(data?: any){
     if (!this.userForm) return;
@@ -109,7 +101,6 @@ export class UserProfile {
   }
 
   addImage = () => this.navCtrl.push(AddUserImagePage, {user: this.user, userID: this.user._id});
-
 
   validationMessages = {
     'username': {

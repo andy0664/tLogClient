@@ -101,10 +101,7 @@ export class ShowUserPage {
     console.log("Show Friend");
     this.userID=friendID;
     this.url = url;
+    this.ownProfile=false;
     this.initUser();
   }
-
-
-
-
 }
