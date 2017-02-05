@@ -22,11 +22,13 @@ export class AddTripPage {
   constructor(public navCtrl: NavController, private fb: FormBuilder, private tLogService: Tlog, private alertCtrl: AlertController) {}
 
   buildForm(): void {
+    this.trip.begin=new Date();
+    this.trip.end=new Date();
     this.tripForm = this.fb.group({
       'name': [this.trip.name,[Validators.required,Validators.maxLength(100),Validators.minLength(3)]],
       'description': [this.trip.description,[Validators.maxLength(500)]],
-      'begin': [this.trip.begin,[]],
-      'end': [this.trip.begin,[]],
+      'begin': [this.trip.begin.toISOString(),[]],
+      'end': [this.trip.end.toISOString(),[]],
       'share': [false,[]]
     });
   }
