@@ -113,7 +113,7 @@ export class Comment{
   trip?:{_id:string,name:string};
   comment:string;
   createdAt:Date;
-  createdAtString:string;
+  createdAtString?:string;
 }
 
 export class TopTenTripResult{

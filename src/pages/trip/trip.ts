@@ -41,6 +41,12 @@ export class TripPage {
   removePoiType=1;
   removeTripType=2;
 
+  myIcon = L.icon({
+    iconUrl: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
+    iconSize: [28, 50],
+    popupAnchor: [-3, -76],
+  });
+
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
               public navParams: NavParams,
@@ -154,7 +160,7 @@ export class TripPage {
    {icon: (poi.images.length>0)?this.pictureIcon:this.standardIcon})
    .on('popupopen',this.onPopupOpen(poi));*/
 
-  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi))
+  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi), {icon: this.myIcon})
     .on('popupopen', this.onPopupOpen(poi));
 
 
