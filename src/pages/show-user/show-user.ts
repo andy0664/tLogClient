@@ -22,6 +22,7 @@ export class ShowUserPage {
   count: number;
   url: SafeUrl;
   userID:string;
+  ownProfile:boolean=false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -42,22 +43,10 @@ export class ShowUserPage {
     this.tlog.loadOtherUser(this.userID)
       .then(user => {
         this.user = user;
-        /*for(let friend of this.user.friends){
-          this.tlog.getUser(friend.id)
-            .then(user=>{
-              console.log(JSON.stringify(user))
-              //friend.image = user.images[0]
-
-              Promise.all(user.images.map((image) => {
-                console.log(image.id);
-                this.tlog.getImageURL(image.id)
-                  .then((url=>{
-                    friend.url = this.sanitizer.bypassSecurityTrustUrl(url)
-                  }))
-              }))
-            });
-
-        }*/
+        this.security.getUser()
+          .then(storedUser => {
+            if(this.userID===storedUser.id)
+              this.ownProfile=true;})
       })
       .catch(err => this.showAlert("Error", "Could not load the specific user"));
     this.tlog.checkFriend(this.userID)
@@ -109,10 +98,7 @@ export class ShowUserPage {
     console.log("Show Friend");
     this.userID=friendID;
     this.url = url;
+    this.ownProfile=false;
     this.initUser();
   }
-
-
-
-
 }
