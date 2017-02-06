@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, AlertController, LoadingController, NavParams} from 'ionic-angular';
 import {Tlog} from "../../providers/tlog";
 import {AddCommentPage} from "../add-comment/add-comment";
+import {Comment} from "../../models/models";
 
 /*
   Generated class for the ShowComments page.
@@ -15,7 +16,7 @@ import {AddCommentPage} from "../add-comment/add-comment";
 })
 export class ShowCommentsPage {
 
-  comments:Array<Component>=[];
+  comments:Array<Comment>=[];
   tripID:string;
   creator:string;
 
