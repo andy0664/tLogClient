@@ -29,7 +29,7 @@
  <hr style="height: 4px;" />
   <ion-list>
     <ion-item *ngFor="let item of trips" (click)="tripClicked(item._id)">
-      <i class="fa fa-map-signs fa-2" aria-hidden="true"></i>
+      <ion-icon item-left name="map"></ion-icon>
       <b>{{ item.name }}</b> by {{item.creator.local.username}}
       <ion-icon class="heard" name="heart"></ion-icon>
       {{item.likeCount}}
