@@ -31,8 +31,8 @@
         <p>{{ formErrors.username }}</p>
       </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="user.local.email" formControlName="email"></ion-input>
-      </ion-item>
+      <ion-input type="text" [(ngModel)]="user.local.email" formControlName="email"></ion-input>
+    </ion-item>
       <ion-item *ngIf="formErrors.email" class="item-md-danger">
         <p>{{ formErrors.email }}</p>
       </ion-item>

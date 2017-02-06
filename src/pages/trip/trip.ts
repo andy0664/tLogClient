@@ -42,7 +42,7 @@ export class TripPage {
   removeTripType=2;
 
   myIcon = L.icon({
-    iconUrl: '../assets/images/Food.png',
+    iconUrl: 'http://fs5.directupload.net/images/170206/temp/xcr66xxz.png',
     iconSize: [50, 50],
     iconAnchor: [26, 44]
   });
