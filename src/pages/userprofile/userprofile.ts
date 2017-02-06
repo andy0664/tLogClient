@@ -27,6 +27,7 @@ export class UserProfile {
   user: ProfileUser = new ProfileUser();
 
   images: SafeUrl[];
+  profilePicture:SafeUrl;
 
   constructor(public navCtrl: NavController,
               private fb:FormBuilder,
@@ -67,7 +68,8 @@ export class UserProfile {
 
   getImages = () =>  Promise.all(this.user.images.map((image) => this.tlog.getImageURL(image.id)
     .then((url=>this.sanitizer.bypassSecurityTrustUrl(url)))))
-    .then(urls => urls.forEach((url,i)=>this.user.images[i].url=url));
+    //.then(urls => urls.forEach((url,i)=>this.user.images[i].url=url));
+    .then(urls=> this.profilePicture= urls[urls.length-1])
 
   onValueChanged(data?: any){
     if (!this.userForm) return;

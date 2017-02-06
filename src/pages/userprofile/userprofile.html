@@ -18,9 +18,10 @@
 <ion-content padding>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <ion-list no-lines="">
-      <ion-card *ngFor="let image of user.images">
+      <ion-card style="width: 50%; height: auto; margin-right: auto; margin-left: auto">
         <ion-card-content>
-          <img [src]="image.url" >
+          <img *ngIf="profilePicture" [src]="profilePicture" >
+          <img *ngIf="!profilePicture" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg" >
         </ion-card-content>
       </ion-card>
       <ion-item>
