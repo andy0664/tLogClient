@@ -46,8 +46,10 @@ export class POI {
   description: string;
   createdAt: Date;
   loc: {
+    type:string,
     coordinates: number[]
   };
+  type?:string;
   sumCoordinates:number;
   images: Image[];
 }
