@@ -39,7 +39,7 @@
   </ion-list>
 
   <ion-list>
-    <ion-list-header color="light" style="text-align: center; color: black" *ngIf="items"><h2>Results</h2></ion-list-header>
+    <ion-list-header color="light" style="text-align: center; color: black" *ngIf="searchString"><h2>Results</h2></ion-list-header>
     <ion-item *ngFor="let item of items">
       <div *ngIf="searchType==='trips' || searchType==='locations'" (click)="tripClicked(item._id)">{{ item.name }}</div>
       <div *ngIf="searchType==='users'" (click)="userClicked(item._id)">{{ item.local.username }}</div>
