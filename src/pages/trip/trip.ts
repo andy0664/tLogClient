@@ -42,9 +42,9 @@ export class TripPage {
   removeTripType=2;
 
   myIcon = L.icon({
-    iconUrl: 'http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png',
-    iconSize: [28, 50],
-    popupAnchor: [-3, -76],
+    iconUrl: '../assets/images/Food.png',
+    iconSize: [50, 50],
+    iconAnchor: [26, 44]
   });
 
   constructor(public navCtrl: NavController,

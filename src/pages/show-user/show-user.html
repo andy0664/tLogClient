@@ -37,7 +37,7 @@
   <ion-list>
     <ion-list-header color="light" style="text-align: center; color: black"><h2>Trips</h2></ion-list-header>
     <ion-item *ngFor="let trip of user.trips" (click)="showTrip(trip._id)">
-      <ion-icon name="map"></ion-icon>
+      <ion-icon name="map" item-left></ion-icon>
       {{trip.name}}
     </ion-item>
   </ion-list>

@@ -10,32 +10,36 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>search</ion-title>
+    <ion-title>Search for {{searchType}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list-header>
-    Search Typ
-  </ion-list-header>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
   <ion-list radio-group>
+    <ion-list-header color="light" style="text-align: center; color: black"><h2>Search Type</h2></ion-list-header>
     <ion-item>
       <ion-label>Users</ion-label>
+      <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
       <ion-radio value="users" checked="true" (click)="resetItems('users')"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Trips</ion-label>
+      <ion-icon name="map" item-left></ion-icon>
       <ion-radio value="trips" (click)="resetItems('trips')"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Trip by location</ion-label>
+      <ion-icon item-left name="pin"></ion-icon>
       <ion-radio value="locations" (click)="resetItems('locations')"></ion-radio>
     </ion-item>
   </ion-list>
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
   <ion-list>
+    <ion-list-header color="light" style="text-align: center; color: black" *ngIf="items"><h2>Results</h2></ion-list-header>
     <ion-item *ngFor="let item of items">
       <div *ngIf="searchType==='trips' || searchType==='locations'" (click)="tripClicked(item._id)">{{ item.name }}</div>
       <div *ngIf="searchType==='users'" (click)="userClicked(item._id)">{{ item.local.username }}</div>
