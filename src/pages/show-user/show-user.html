@@ -18,23 +18,26 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card >
+  <ion-card style="width: 50%; height: auto; margin-right: auto; margin-left: auto">
     <ion-card-content>
-      <img  [src]="url" >
+      <img *ngIf="url" [src]="url" >
+      <img *ngIf="!url" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg" >
     </ion-card-content>
   </ion-card>
-  <h4>Friends:</h4>
-  <ion-list>
 
+
+  <ion-list>
+    <ion-list-header color="light" style="text-align: center; color: black"><h2>Friends</h2></ion-list-header>
     <ion-item *ngFor="let friend of user.friends" (click)="showFriend(friend._id,friend.url)">
       <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
       {{friend.local.username}}
     </ion-item>
   </ion-list>
-  <h4>Trips:</h4>
+
   <ion-list>
+    <ion-list-header color="light" style="text-align: center; color: black"><h2>Trips</h2></ion-list-header>
     <ion-item *ngFor="let trip of user.trips" (click)="showTrip(trip._id)">
-      <ion-icon name="map"></ion-icon>
+      <ion-icon name="map" item-left></ion-icon>
       {{trip.name}}
     </ion-item>
   </ion-list>

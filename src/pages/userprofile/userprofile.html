@@ -18,29 +18,11 @@
 <ion-content padding>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <ion-list no-lines="">
-      <ion-card *ngFor="let image of user.images">
+      <ion-card style="width: 50%; height: auto; margin-right: auto; margin-left: auto">
         <ion-card-content>
-          <img [src]="image.url" >
+          <img *ngIf="profilePicture" [src]="profilePicture" >
+          <img *ngIf="!profilePicture" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg" >
         </ion-card-content>
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="thumbs-up"></ion-icon>
-              <div>12 Likes</div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear small>
-              <ion-icon name="text"></ion-icon>
-              <div>4 Comments</div>
-            </button>
-          </ion-col>
-          <ion-col center text-center>
-            <ion-note>
-              11h ago
-            </ion-note>
-          </ion-col>
-        </ion-row>
       </ion-card>
       <ion-item>
         <ion-input readonly="true" [(ngModel)]="user.local.username" formControlName="username"></ion-input>

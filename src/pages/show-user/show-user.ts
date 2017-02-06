@@ -76,7 +76,7 @@ export class ShowUserPage {
       .then(user =>  {friendRequest.userFrom=user.id;
         this.tlog.sendFriendRequest(friendRequest)
           .then(res => {this.count=1;
-            this.tlog.presentToast("Request has been send");
+            this.tlog.presentToast("Request has been send.");
           })})
       .catch(err => this.showAlert("ERROR",`Couldn't send request ${err.json().message}`))
   }
@@ -84,7 +84,10 @@ export class ShowUserPage {
 
   removeFriend = () =>{
     this.tlog.removeFriend(this.userID)
-      .then(res => this.initUser())
+      .then(res => {
+        this.initUser();
+        this.tlog.presentToast("User has been removed.");
+      })
       .catch(err => this.showAlert("ERROR",`Couldn't remove friend ${err.json().message}`))
   }
 

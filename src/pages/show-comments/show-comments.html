@@ -21,18 +21,17 @@
 
 
 <ion-content padding>
-
-    <ion-item *ngFor="let comment of comments">
-      <ion-card>
+  <p *ngIf="comments.length === 0">No comments available</p>
+      <ion-card *ngFor="let comment of comments">
         <ion-row>
           <ion-col item-left *ngIf="creator === comment.creator.local.username" >
-            <p style="color: #3a4aff"><b>{{comment.creator.local.username}}</b></p>
+            <p style="color: #3a4aff; margin-left: 10px"><b>{{comment.creator.local.username}}</b></p>
           </ion-col>
           <ion-col item-left *ngIf="creator != comment.creator.local.username" >
-            <p style="color: #ffa54d"><b>{{comment.creator.local.username}}</b></p>
+            <p style="color: #ffa54d; margin-left: 10px"><b>{{comment.creator.local.username}}</b></p>
           </ion-col>
           <ion-col item-right>
-            <p>{{comment.createdAt}}</p>
+            <p style="text-align: right; margin-right: 4px">{{comment.createdAtString}}</p>
           </ion-col>
         </ion-row>
       <ion-card-content>
@@ -40,6 +39,5 @@
         <p>{{comment.comment}}</p>
       </ion-card-content>
       </ion-card>
-    </ion-item>
 
 </ion-content>
