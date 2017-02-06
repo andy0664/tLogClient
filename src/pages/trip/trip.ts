@@ -28,9 +28,6 @@ export class TripPage {
   currentLocationMarker: L.Marker;
   markers: L.Marker[];
   isOwner: boolean = false;
-  // currentLocationIcon: L.AwesomeMarkers.Icon;
-  //pictureIcon: L.AwesomeMarkers.Icon;
-  //standardIcon: L.AwesomeMarkers.Icon;
   trip: Trip = new Trip();
   path: L.Polyline;
   like: number = 0;
@@ -40,12 +37,12 @@ export class TripPage {
   creator:string;
   removePoiType=1;
   removeTripType=2;
+  iconMap:Map<string,string> = new Map([['Bar','http://fs5.directupload.net/images/170206/temp/xcr66xxz.png'],
+    ['Food','http://fs5.directupload.net/images/170206/xvipb6zk.png'],
+    ['Museum','http://fs5.directupload.net/images/170206/i6k7zb5h.png'],
+    ['Point','http://fs5.directupload.net/images/170206/bgk3j7f4.png'],
+    ['Shopping','http://fs5.directupload.net/images/170206/sbozfos9.png']]);
 
-  myIcon = L.icon({
-    iconUrl: 'http://fs5.directupload.net/images/170206/temp/xcr66xxz.png',
-    iconSize: [50, 50],
-    iconAnchor: [26, 44]
-  });
 
   constructor(public navCtrl: NavController,
               private alertCtrl: AlertController,
@@ -54,24 +51,10 @@ export class TripPage {
               private tlog: Tlog,
               private asCtrl: ActionSheetController,
               private security: Security) {
-    //L.AwesomeMarkers.Icon.prototype.options.prefix = 'fa';
-    /*this.currentLocationIcon = L.AwesomeMarkers.icon({
-     icon: 'hand-o-down',
-     markerColor: 'red'
-     });
-     this.pictureIcon = L.AwesomeMarkers.icon({
-     icon: "picture-o",
-     markerColor: "blue"
-     });
-     this.standardIcon = L.AwesomeMarkers.icon({
-     icon: "star",
-     markerColor: "blue"
-     });*/
   }
 
   presentPOIActionSheetOwner = (poi: POI): ActionSheet =>
     this.asCtrl.create({
-      //title: 'Modify your album',
       buttons: [
         {
           text: 'Show Details',
@@ -115,7 +98,7 @@ export class TripPage {
             this.showPoi(poi);
           }
         },
-         {
+        {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -138,7 +121,7 @@ export class TripPage {
           handler: () => {
             switch (type){
               case this.removePoiType:
-                  this.removePoi(id);break;
+                this.removePoi(id);break;
               case this.removeTripType:
                 this.removeTrip();break;
             }
@@ -156,12 +139,15 @@ export class TripPage {
   }).present();
 
   poiToLatLng = (poi: POI) => L.latLng(poi.loc.coordinates[1], poi.loc.coordinates[0]);
-  /*poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
-   {icon: (poi.images.length>0)?this.pictureIcon:this.standardIcon})
-   .on('popupopen',this.onPopupOpen(poi));*/
 
-  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi), {icon: this.myIcon})
-    .on('popupopen', this.onPopupOpen(poi));
+  poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
+    {icon:L.icon({iconUrl:this.iconMap.get(poi.type),
+      iconAnchor:[26,44],
+      iconSize: [50, 50]})})
+    .on('popupopen',this.onPopupOpen(poi));
+
+  /*poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi))
+   .on('popupopen', this.onPopupOpen(poi));*/
 
 
   initMap = () => {
@@ -269,9 +255,7 @@ export class TripPage {
     this.tlog.loadTrip(this.navParams.get("trip"))
       .then(trip => {
         this.trip = trip;
-        console.log(this.trip.creator.local.username)
         this.creator = this.trip.creator.local.username
-        console.log(this.creator)
         this.likeCount = this.trip.likes.length;
 
         const loading = this.loadingCtrl.create({
