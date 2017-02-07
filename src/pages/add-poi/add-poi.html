@@ -17,6 +17,11 @@
   <ion-list>
     <ion-item>
       <ion-label>Type</ion-label>
+      <ion-icon *ngIf="poiType==='Bar'" item-right ><i class="fa fa-glass" aria-hidden="true"></i></ion-icon>
+      <ion-icon *ngIf="poiType==='Food'" item-right><i class="fa fa-cutlery" aria-hidden="true"></i></ion-icon>
+      <ion-icon *ngIf="poiType==='Museum'" item-right><i class="fa fa-university" aria-hidden="true"></i></ion-icon>
+      <ion-icon *ngIf="poiType==='Point'" item-right><i class="fa fa-map-signs" aria-hidden="true"></i></ion-icon>
+      <ion-icon *ngIf="poiType==='Shopping'" item-right><i class="fa fa-shopping-cart" aria-hidden="true"></i></ion-icon>
       <ion-select [(ngModel)]="poiType">
         <ion-option value="Bar">Bar</ion-option>
         <ion-option value="Food">Food</ion-option>
