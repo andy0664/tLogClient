@@ -21,6 +21,7 @@ export class AddPoiPage {
   poiForm: FormGroup;
   mode = "new";
   action: any;
+  poiType:string='Point';
 
   constructor(public navCtrl: NavController,
               private fb: FormBuilder,
@@ -63,6 +64,7 @@ export class AddPoiPage {
     if (poi) {
       this.mode = "edit";
       this.poi = poi;
+      this.poiType = poi.type;
       this.action = this.tLogService.updatePOI;
     }
     ;
@@ -96,6 +98,7 @@ export class AddPoiPage {
     console.log("SAVING POI!");
     const poi = this.poiForm.value;
     poi._id = this.poi._id;
+    poi.type = this.poiType;
     if (!this.poi.loc) {
       const coords: L.LatLng = this.navParams.get("coordinates");
       poi.loc = {coordinates: [coords.lng, coords.lat]};
