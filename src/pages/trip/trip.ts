@@ -143,7 +143,9 @@ export class TripPage {
   poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi),
     {icon:L.icon({iconUrl:this.iconMap.get(poi.type),
       iconAnchor:[26,44],
-      iconSize: [50, 50]})})
+      iconSize: [50, 50],
+      popupAnchor: [0, -30]
+    })})
     .on('popupopen',this.onPopupOpen(poi));
 
   /*poiToCoords = (poi: POI) => L.marker(this.poiToLatLng(poi))

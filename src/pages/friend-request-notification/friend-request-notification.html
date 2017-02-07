@@ -19,10 +19,10 @@
     <p *ngIf="friendRequests.length === 0">No friend requests available<br><br></p>
     <ion-item *ngFor="let request of friendRequests">
       {{request.userFrom.local.username}}
-      <button ion-button icon-only color="royal" (click)="accept(request.userFrom._id)">
+      <button ion-button icon-only item-right color="royal" (click)="accept(request.userFrom._id)">
         <ion-icon name="checkmark"></ion-icon>
       </button>
-      <button ion-button icon-only color="royal" (click)="reject(request.userFrom._id)">
+      <button ion-button icon-only item-right color="royal" (click)="reject(request.userFrom._id)">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-item>
@@ -35,8 +35,8 @@
       <div (click)="displayTrip(notification.trip._id,notification._id)">
         {{notification.userFrom.local.username}} created a new Trip: {{notification.trip.name}}
       </div>
-      <button ion-button icon-only color="royal" (click)="removeNotification(notification._id)">
-        <ion-icon name="close"></ion-icon>
+      <button ion-button  item-right icon-only color="royal" (click)="removeNotification(notification._id)">
+        <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
