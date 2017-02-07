@@ -59,9 +59,13 @@ export class SearchPage {
       this.showAlert("INFO","Could not find any location with that name")
     }else{
       this.geoLocation=res[0];
-      let startPoint = parseFloat(this.geoLocation.raw.boundingbox[0])+parseFloat(this.geoLocation.raw.boundingbox[2]);
-      let endPoint = parseFloat(this.geoLocation.raw.boundingbox[1])+parseFloat(this.geoLocation.raw.boundingbox[3]);
-      this.searchString = `${this.serverConfig.tripByLocationURI}?startPoint=${startPoint}&endPoint=${endPoint}`;
+      let longitude1 = parseFloat(this.geoLocation.raw.boundingbox[2]);
+      let longitude2 = parseFloat(this.geoLocation.raw.boundingbox[3]);
+      let latitude1 = parseFloat(this.geoLocation.raw.boundingbox[0]);
+      let latitude2 = parseFloat(this.geoLocation.raw.boundingbox[1]);
+      //let startPoint = parseFloat(this.geoLocation.raw.boundingbox[0])+parseFloat(this.geoLocation.raw.boundingbox[2]);
+      //let endPoint = parseFloat(this.geoLocation.raw.boundingbox[1])+parseFloat(this.geoLocation.raw.boundingbox[3]);
+      this.searchString = `${this.serverConfig.tripByLocationURI}?longitude1=${longitude1}&latitude1=${latitude1}&longitude2=${longitude2}&latitude2=${latitude2}`;
       this.search();
     }
   }
