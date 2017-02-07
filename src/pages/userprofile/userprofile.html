@@ -20,8 +20,8 @@
     <ion-list no-lines="">
       <ion-card style="width: 50%; height: auto; margin-right: auto; margin-left: auto">
         <ion-card-content>
-          <img *ngIf="profilePicture" [src]="profilePicture" >
-          <img *ngIf="!profilePicture" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg" >
+          <img *ngIf="profilePicture" [src]="profilePicture">
+          <img *ngIf="!profilePicture" src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg">
         </ion-card-content>
       </ion-card>
       <ion-item>
@@ -31,8 +31,8 @@
         <p>{{ formErrors.username }}</p>
       </ion-item>
       <ion-item>
-      <ion-input type="text" [(ngModel)]="user.local.email" formControlName="email"></ion-input>
-    </ion-item>
+        <ion-input type="text" [(ngModel)]="user.local.email" formControlName="email"></ion-input>
+      </ion-item>
       <ion-item *ngIf="formErrors.email" class="item-md-danger">
         <p>{{ formErrors.email }}</p>
       </ion-item>
@@ -42,8 +42,10 @@
     <ion-label>Trip Notifications</ion-label>
     <ion-toggle [(ngModel)]="user.tripNotifications"></ion-toggle>
   </ion-item>-->
-  <button (click)="change()"  ion-button [disabled]="!userForm.valid">Save Changes</button>
-  <button (click)="addImage()"  ion-button [disabled]="!userForm.valid">Add Image</button>
+  <div text-center>
+    <button (click)="change()" ion-button [disabled]="!userForm.valid">Save Changes</button>
+    <button (click)="addImage()" ion-button [disabled]="!userForm.valid">Add Image</button>
+  </div>
 
 </ion-content>
 
