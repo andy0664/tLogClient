@@ -44,7 +44,7 @@ export class LoginPage {
       this.security.login(this.username,this.password)
       .then(()=>this.navCtrl.setRoot(ListPage))
       .catch((err) => {
-        this.showAlert("Error",`Could not log you in: ${this.serverconfig.host}`)}
+        this.showAlert("Error","Wrong username or password")}
       );
 
 
