@@ -20,7 +20,7 @@
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
   <ion-list radio-group>
-    <ion-list-header color="light" style="text-align: center; color: black"><h2>Search Type</h2></ion-list-header>
+    <ion-list-header><h3>Search Type</h3></ion-list-header>
     <ion-item>
       <ion-label>Users</ion-label>
       <ion-icon item-left><i class="fa fa-user" aria-hidden="true"></i></ion-icon>
@@ -28,7 +28,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Trips</ion-label>
-      <ion-icon name="map" item-left></ion-icon>
+      <ion-icon class="fa fa-globe" item-left></ion-icon>
       <ion-radio value="trips" (click)="resetItems('trips')"></ion-radio>
     </ion-item>
     <ion-item>
@@ -39,7 +39,7 @@
   </ion-list>
 
   <ion-list>
-    <ion-list-header color="light" style="text-align: center; color: black" *ngIf="searchString"><h2>Results</h2></ion-list-header>
+    <ion-list-header *ngIf="searchString"><h3>Results</h3></ion-list-header>
     <ion-item *ngFor="let item of items">
       <div *ngIf="searchType==='trips' || searchType==='locations'" (click)="tripClicked(item._id)">{{ item.name }}</div>
       <div *ngIf="searchType==='users'" (click)="userClicked(item._id)">{{ item.local.username }}</div>

@@ -14,22 +14,27 @@
 
 
 <ion-content padding>
-<ion-list>
-  <ion-item>
-    <ion-label floating>Description</ion-label>
-    <ion-textarea rows="2" [(ngModel)]="description"></ion-textarea>
-  </ion-item>
-</ion-list>
-  <button ion-button (click)="takePhoto()" icon-left>
-    <ion-icon name="camera"> </ion-icon> Take Image
-  </button>
-  <button ion-button (click)="selectPicture()" icon-left>
-    <ion-icon name="images"> </ion-icon>Pick Image
-  </button>
-  <button ion-button (click)="upload()" [disabled]="!image" color="dark" icon-left>
-    <ion-icon name="cloud-upload"></ion-icon> Save
-  </button>
-<ion-card *ngIf="image">
-<img [src]="image" />
-</ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea rows="2" [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <div text-center>
+    <button ion-button (click)="takePhoto()" icon-left>
+      <ion-icon name="camera"></ion-icon>
+      Take Image
+    </button>
+    <button ion-button (click)="selectPicture()" icon-left>
+      <ion-icon name="images"></ion-icon>
+      Pick Image
+    </button>
+    <button ion-button (click)="upload()" [disabled]="!image" color="dark" icon-left>
+      <ion-icon name="cloud-upload"></ion-icon>
+      Save
+    </button>
+  </div>
+  <ion-card *ngIf="image">
+    <img [src]="image"/>
+  </ion-card>
 </ion-content>

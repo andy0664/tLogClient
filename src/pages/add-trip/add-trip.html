@@ -50,6 +50,8 @@
         {{ formErrors.end }}
       </ion-item>
     </ion-list>
-    <button (click)="save()"  ion-button [disabled]="!tripForm.valid">Save</button>
+    <div text-center>
+      <button (click)="save()"  ion-button [disabled]="!tripForm.valid">Save</button>
+    </div>
   </form>
 </ion-content>

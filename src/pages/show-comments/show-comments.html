@@ -31,7 +31,7 @@
             <p style="color: #ffa54d; margin-left: 10px"><b>{{comment.creator.local.username}}</b></p>
           </ion-col>
           <ion-col item-right>
-            <p style="text-align: right; margin-right: 4px">{{comment.createdAtString}}</p>
+            <p style="text-align: right; margin-right: 4px">{{comment.createdAt | date: 'hh:mm, dd MM yyyy'}}</p>
           </ion-col>
         </ion-row>
       <ion-card-content>

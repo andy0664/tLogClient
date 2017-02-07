@@ -1,20 +1,22 @@
-<ion-header>
+<ion-header xmlns="http://www.w3.org/1999/html">
 
   <ion-toolbar>
     <ion-navbar>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>My Trips</ion-title>
+      <ion-title>Trips</ion-title>
     </ion-navbar>
     <ion-buttons end>
 
-      <button ion-button icon-only end (click)="showRequests()" >
+      <button ion-button icon-only end (click)="showRequests()">
         <ion-label>{{newFriendRequests.length+newNotifications.length}}</ion-label>
-        <ion-icon name="ios-notifications-outline" *ngIf="newFriendRequests.length+newNotifications.length===0"></ion-icon>
-        <ion-icon name="notifications" style="color: #ffd53e;" *ngIf="newFriendRequests.length+newNotifications.length!==0"></ion-icon>
+        <ion-icon name="ios-notifications-outline"
+                  *ngIf="newFriendRequests.length+newNotifications.length===0"></ion-icon>
+        <ion-icon name="notifications" style="color: #ffd53e;"
+                  *ngIf="newFriendRequests.length+newNotifications.length!==0"></ion-icon>
       </button>
-      <button  ion-button icon-only color="royal" (click)="addTrip()">
+      <button ion-button icon-only color="royal" (click)="addTrip()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -24,14 +26,18 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="itemTapped($event, item._id)">
-      <ion-icon item-left name="map"></ion-icon>
-      <h2>{{item.name}}</h2>
+      <h2><strong>{{item.name}}</strong></h2>
       <p *ngIf="item.description">{{item.description}}</p>
-      <p item-right>From: {{item.beginString}}<br/>To: {{item.endString}}</p>
-      <!--<ion-note item-right>
-        {{item.createdAt}}
-      </ion-note>-->
+      <p item-right>
+        <ion-icon name="heart" *ngIf="item.likeCount>1 || item.likeCount===0"> {{item.likeCount}} Likes
+        </ion-icon>
+        <ion-icon name="heart" *ngIf="item.likeCount===1"> {{item.likeCount}} Like</ion-icon>
+      </p>
+      <p>
+        <strong>From:</strong><span style="display:inline-block; width: 5px;"></span> {{item.begin | date:'dd MMMM yyyy'}}<br>
+        <strong>To:</strong><span style="display:inline-block; width: 21px;"></span> {{item.end | date:'dd MMMM yyyy'}}<br>
+      </p>
+      <!--<ion-note>Created at: {{ item.createdAt | date:'dd MMMM yyyy' }}</ion-note>-->
     </ion-item>
-
   </ion-list>
 </ion-content>

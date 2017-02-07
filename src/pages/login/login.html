@@ -6,18 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list>
-    <ion-input type="text" placeholder="Username or Email" [(ngModel)]="username"></ion-input>
-    <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
-  </ion-list>
-  <button (click)="login()" ion-button>Login</button>
-  <button (click)="register()" ion-button color="dark">Create an Account</button>
+<ion-content padding scroll="false">
+  <div class="loginForm">
+    <div text-center>
+      <img src="http://fs5.directupload.net/images/170207/batdlczd.png" class="logo">
+      <ion-label class="info">Login with your TLog Account</ion-label>
+    </div>
+    <ion-list>
+      <ion-input type="text" placeholder="Username or Email" [(ngModel)]="username"></ion-input>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+    </ion-list>
+    <div text-center>
+      <button (click)="login()" ion-button>Login
+      </button>
+      <button (click)="register()" ion-button>Sign up</button>
+    </div>
+  </div>
 </ion-content>

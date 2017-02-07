@@ -49,14 +49,7 @@ export class ListPage {
     });
     loading.present()
       .then(this.tLogService.getTrips)
-      .then(trips => {
-        this.items = trips;
-        for(let item of this.items){
-          item.beginString =  item.begin.toLocaleString().slice(0,10).split("-").reverse().join(".").toString();
-          item.endString =  item.end.toLocaleString().slice(0,10).split("-").reverse().join(".").toString();
-        }
-
-      }).then(() => {
+      .then(trips => this.items = trips).then(() => {
       loading.dismiss();
       if (this.items.length === 0) {
         this.showAlert("INFO", "You do not have any trips yet. Press the Plus Icon to create one.")
