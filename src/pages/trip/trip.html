@@ -24,11 +24,6 @@
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
-      <button *ngIf="isOwner" ion-button icon-only color="royal" (click)="startRemoveTrip()">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -62,6 +57,11 @@
     <ion-buttons end>
       <ion-label *ngIf="trip.share===true && isOwner===true">Public</ion-label>
       <ion-label *ngIf="trip.share===false && isOwner===true">Private</ion-label>
+    </ion-buttons>
+    <ion-buttons end>
+      <button *ngIf="isOwner" ion-button icon-only color="royal" (click)="startRemoveTrip()">
+        <ion-icon name="close"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
